@@ -1,0 +1,6 @@
+server:
+  servlet:
+    context-path: /xxx
+  port: 8081
+  error:
+    include-exception: true
