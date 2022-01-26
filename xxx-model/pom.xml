@@ -9,18 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>top.tanmw</groupId>
-    <artifactId>xxx-web</artifactId>
+    <artifactId>xxx-model</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>top.tanmw</groupId>
-            <artifactId>xxx-service</artifactId>
-            <version>1.0-dev</version>
-        </dependency>
-    </dependencies>
+
 </project>

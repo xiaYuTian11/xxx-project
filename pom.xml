@@ -18,6 +18,8 @@
         <module>xxx-service</module>
         <module>xxx-dao</module>
         <module>xxx-common</module>
+        <module>xxx-api</module>
+        <module>xxx-model</module>
     </modules>
 
     <properties>

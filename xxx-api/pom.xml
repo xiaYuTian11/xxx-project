@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>top.tanmw</groupId>
-    <artifactId>xxx-web</artifactId>
+    <artifactId>xxx-api</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,9 +17,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>top.tanmw</groupId>
-            <artifactId>xxx-service</artifactId>
-            <version>1.0-dev</version>
+            <groupId></groupId>
+            <artifactId>xxx-model</artifactId>
         </dependency>
     </dependencies>
 </project>
