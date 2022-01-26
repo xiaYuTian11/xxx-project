@@ -27,10 +27,10 @@ spring:
       add-mappings: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.pg.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yeb?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-    username: root
-    password: root
+    url: @datasource.url@
+    username: @datasource.username@
+    password: @datasource.password@
+    driver-class-name: @datasource.driver@
     # 连接池
     hikari:
       #连接池名

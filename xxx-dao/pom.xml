@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>top.tanmw</groupId>
-            <artifactId>xxx-common</artifactId>
+            <artifactId>xxx-model</artifactId>
             <version>1.0-dev</version>
         </dependency>
     </dependencies>
