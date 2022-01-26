@@ -76,6 +76,8 @@
                 <datasource.driver>org.postgresql.Driver</datasource.driver>
                 <datasource.username>postgres</datasource.username>
                 <datasource.password>20191809</datasource.password>
+                <log-level>info</log-level>
+                <log-path>./logs</log-path>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -90,6 +92,8 @@
                 <datasource.driver>org.postgresql.Driver</datasource.driver>
                 <datasource.username>postgres</datasource.username>
                 <datasource.password>20191809</datasource.password>
+                <log-level>info</log-level>
+                <log-path>/home/logs</log-path>
             </properties>
         </profile>
         <profile>
@@ -101,6 +105,8 @@
                 <datasource.driver>org.postgresql.Driver</datasource.driver>
                 <datasource.username>postgres</datasource.username>
                 <datasource.password>20191809</datasource.password>
+                <log-level>info</log-level>
+                <log-path>/home/logs</log-path>
             </properties>
         </profile>
     </profiles>
