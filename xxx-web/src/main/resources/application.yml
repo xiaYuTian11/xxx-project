@@ -52,3 +52,5 @@ custom:
   log:
     level: @log-level@
     path: @log-path@
+  swagger:
+    enable: @swagger-enable@
