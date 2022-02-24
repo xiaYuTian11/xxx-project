@@ -1,11 +1,12 @@
 package ${package_name};
 
-import com.zenith.common.domain.vo.PageVO;
+com.baomidou.mybatisplus.extension.plugins.pagination
+import com.sjr.common.entity.Result;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;
 import ${entity_package_name}.${table_name};
 import ${vo_package_name}.${table_name}VO;
-import com.zenith.mybatis.core.api.base.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
 * @author ${author}
@@ -15,25 +16,25 @@ public interface ${table_name}Service extends IService<${table_name}> {
     /***
     * 新增
     */
-    String save(${table_name}DTO dto);
+    Result save(${table_name}DTO dto);
 
     /**
     * 详情
     */
-    ${table_name}VO findById(String id);
+    Result findById(String id);
 
     /**
     * 修改
     */
-    boolean update(${table_name}DTO dto);
+    Result update(${table_name}DTO dto);
 
     /**
     * 删除
     */
-    boolean delete(String id);
+    Result delete(String id);
 
     /**
     * 列表查询
     */
-    PageVO<?> list(${table_name}ListDTO dto);
+    Result list(${table_name}ListDTO dto);
 }

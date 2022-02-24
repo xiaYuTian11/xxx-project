@@ -2,7 +2,7 @@ package ${package_name};
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zenith.common.domain.vo.PageVO;
+import com.sjr.common.entity.Result;
 import ${api_package_name}.${table_name}Service;
 import ${converter_package_name}.${table_name}Converter;
 import ${dao_package_name}.${table_name}Mapper;
@@ -11,7 +11,7 @@ import ${dto_package_name}.${table_name}ListDTO;
 import ${entity_package_name}.${table_name};
 import com.zenith.front.domain.vo.PageVOExt;
 import ${vo_package_name}.${table_name}VO;
-import com.zenith.mybatis.core.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -55,6 +55,6 @@ public class ${table_name}ServiceImpl extends ServiceImpl<${table_name}Mapper, $
     @Override
     public PageVO<?> list(${table_name}ListDTO dto) {
     final Page<${table_name}> page = ${lower_table_name}Mapper.selectPage(new Page<>(dto.getCurrPage(), dto.getPageSize()), new QueryWrapper<>());
-        return PageVOExt.toVo(page);
+        return page;
     }
 }

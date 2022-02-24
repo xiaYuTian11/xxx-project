@@ -52,10 +52,10 @@
             <properties>
                 <env>dev</env>
                 <datasource.url>
-                    <![CDATA[jdbc:postgresql://192.168.119.222:5432/xxx-project?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
-                <datasource.driver>org.postgresql.Driver</datasource.driver>
-                <datasource.username>postgres</datasource.username>
-                <datasource.password>20191809</datasource.password>
+                    <![CDATA[jdbc:postgresql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
+                <datasource.username>root</datasource.username>
+                <datasource.password>zenithinfo123</datasource.password>
                 <log-level>info</log-level>
                 <log-path>./logs</log-path>
                 <swagger-enable>true</swagger-enable>

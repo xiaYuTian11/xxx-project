@@ -1,6 +1,6 @@
 package ${package_name};
 
-import com.zenith.core.base.BaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${entity_package_name}.${table_name};
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @date ${date}
 */
 @Mapper
-public interface ${table_name}Mapper extends BaseDao<${table_name}> {
+public interface ${table_name}Mapper extends BaseMapper<${table_name}> {
 
 
 }
