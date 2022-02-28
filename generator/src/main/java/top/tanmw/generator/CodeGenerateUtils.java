@@ -1,3 +1,5 @@
+package top.tanmw.generator;
+
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import freemarker.template.Template;
@@ -8,6 +10,8 @@ import java.sql.*;
 import java.util.Date;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static top.tanmw.generator.PathConstants.*;
 
 /**
  * 代码生成器启动类，Generate.java暂时未作使用
@@ -22,37 +26,23 @@ public class CodeGenerateUtils {
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
     private final String showTablesSql = "SHOW TABLES;";
-
     private final String basePath = "D:\\java\\ideaWorkingSpace\\work\\zenith\\zenith-front";
-    private final String basePackageName = "com.zenith.front";
-    private final String AUTHOR = "code generator";
-    private final String baseMapperXmlPath = "zenith-front-service/src/main/resources/";
-    private final String mapperXmlPath = "mapper/revision";
-    private final String baseDaoPath = "zenith-front-service/src/main/java/com/zenith/front/";
-    private final String daoPath = "dao/revision";
-    private final String baseDtoPath = "zenith-front-common/src/main/java/com/zenith/front/";
-    private final String dtoPath = "domain/revision/dto";
-    private final String baseVoPath = "zenith-front-common/src/main/java/com/zenith/front/";
-    private final String voPath = "domain/revision/vo";
-    private final String baseEntityPath = "zenith-front-common/src/main/java/com/zenith/front/";
-    private final String entityPath = "domain/revision/entity";
-    private final String baseServicePath = "zenith-front-api/src/main/java/com/zenith/front/";
-    private final String servicePath = "api/revision";
-    private final String baseServiceImplPath = "zenith-front-service/src/main/java/com/zenith/front/";
-    private final String serviceImplPath = "service/revision";
-    private final String baseControllerPath = "zenith-front-web/src/main/java/com/zenith/front/";
-    private final String controllerPath = "controller/common/revision";
-    private final String baseConverterPath = "zenith-front-service/src/main/java/com/zenith/front/";
-    private final String converterPath = "converter/revision";
-    // private final String modelPath = "domain/entity";
+    private final String projectName = "xxx";
+
+    private final String basePackageName = PROJECT_PREFIX + projectName;
+    private final String basePackagePath = basePackageName.replaceAll("\\.", "/");
+    private final String baseControllerPath = projectName + RAIL + WEB + JAVA_PREFIX + basePackagePath;
+    private final String baseApiPath = projectName + RAIL + API + JAVA_PREFIX + basePackagePath;
+    private final String baseServicePath = projectName + RAIL + SERVICE + JAVA_PREFIX + basePackagePath;
+    private final String baseDaoPath = projectName + RAIL + DAO + JAVA_PREFIX + basePackagePath;
+    private final String baseModelPath = projectName + RAIL + MODEL + JAVA_PREFIX + basePackagePath;
+
     // 优先
     private final Set<String> includeSet = new HashSet<String>() {{
-        add("b01");
-        add("a01");
-        add("a02");
+
     }};
     private final Set<String> excludeSet = new HashSet<String>() {{
-        // add("String");
+
     }};
 
     private final List<ColumnClass> columnClassList = new ArrayList<>();
@@ -72,11 +62,6 @@ public class CodeGenerateUtils {
      * 表对应的类名，表名转驼峰首字母大写
      */
     private String changeTableName;
-
-    public static void main(String[] args) throws Exception {
-        CodeGenerateUtils codeGenerateUtils = new CodeGenerateUtils();
-        codeGenerateUtils.generate();
-    }
 
     public Connection getConnection() throws Exception {
         Class.forName(DRIVER);
@@ -100,7 +85,7 @@ public class CodeGenerateUtils {
             }
             for (String tableNameStr : tables) {
                 tableName = tableNameStr;
-                changeTableName = replaceUnderLineAndUpperCase(tableName) + "Revision";
+                changeTableName = replaceUnderLineAndUpperCase(tableName);
                 columnClassList.clear();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
                 ResultSet resultSet = databaseMetaData.getColumns(null, "%", tableName, "%");
@@ -160,27 +145,28 @@ public class CodeGenerateUtils {
     }
 
     private String getSuffixPackageName(String packagePath) {
-        if (packagePath == null) {
-            return basePackageName;
+        if (StrUtil.isBlank(packagePath)) {
+            return "";
         }
+        packagePath = basePackagePath + SLASH + packagePath;
         StringBuilder sb = new StringBuilder();
-        if (packagePath.contains("/")) {
-            final String[] split = packagePath.split("/");
+        if (packagePath.contains(SLASH)) {
+            final String[] split = packagePath.split(SLASH);
             for (String str : split) {
-                sb.append(str).append(".");
+                sb.append(str).append(DOT);
             }
-            return basePackageName + "." + sb.substring(0, sb.length() - 1);
+            return basePackageName + DOT + sb.substring(0, sb.length() - 1);
         }
-        return basePackageName + "." + packagePath;
+        return packagePath;
     }
 
     private void generateModelFile(ResultSet resultSet) throws Exception {
         final String suffix = ".java";
-        String path = getCreatePath(baseEntityPath, entityPath, suffix);
+        String path = getCreatePath(baseModelPath, "entity", suffix);
         final String templateName = "Model.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, entityPath);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, "entity");
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + ".java 完成 >>>>>>>>>>>");
     }
 
@@ -222,75 +208,75 @@ public class CodeGenerateUtils {
 
     private void generateListDTOFile(ResultSet resultSet) throws Exception {
         final String suffix = "ListDTO.java";
-        String path = getCreatePath(baseDtoPath, dtoPath, suffix);
+        String path = getCreatePath(baseModelPath, DTO, suffix);
         final String templateName = "ListDTO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, dtoPath);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, DTO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "ListDTO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateVOFile(ResultSet resultSet) throws Exception {
         final String suffix = "VO.java";
-        String path = getCreatePath(baseVoPath, voPath, suffix);
+        String path = getCreatePath(baseModelPath, VO, suffix);
         final String templateName = "VO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, voPath);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, VO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "VO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateDTOFile(ResultSet resultSet) throws Exception {
         final String suffix = "DTO.java";
-        String path = getCreatePath(baseDtoPath, dtoPath, suffix);
+        String path = getCreatePath(baseModelPath, DTO, suffix);
         final String templateName = "DTO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, dtoPath);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, DTO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "DTO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateConverterFile(ResultSet resultSet) throws Exception {
         final String suffix = "Converter.java";
-        String path = getCreatePath(baseConverterPath, converterPath, suffix);
+        String path = getCreatePath(baseModelPath, CONVERTER, suffix);
         final String templateName = "Converter.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, converterPath, mapperFile, dataMap);
+        generateFileByTemplate(templateName, CONVERTER, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Converter.java 完成 >>>>>>>>>>>");
     }
 
     private void generateControllerFile(ResultSet resultSet) throws Exception {
         final String suffix = "Controller.java";
-        String path = getCreatePath(baseControllerPath, controllerPath, suffix);
+        String path = getCreatePath(baseControllerPath, CONTROLLER, suffix);
         final String templateName = "Controller.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, controllerPath, mapperFile, dataMap);
+        generateFileByTemplate(templateName, CONTROLLER, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Controller.java 完成 >>>>>>>>>>>");
     }
 
     private void generateServiceImplFile(ResultSet resultSet) throws Exception {
         final String suffix = "ServiceImpl.java";
-        String path = getCreatePath(baseServiceImplPath, serviceImplPath, suffix);
+        String path = getCreatePath(baseServicePath, SERVICE, suffix);
         final String templateName = "ServiceImpl.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, serviceImplPath, mapperFile, dataMap);
+        generateFileByTemplate(templateName, SERVICE, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "ServiceImpl.java 完成 >>>>>>>>>>>");
     }
 
     private void generateServiceInterfaceFile(ResultSet resultSet) throws Exception {
         final String suffix = "Service.java";
-        String path = getCreatePath(baseServicePath, servicePath, suffix);
+        String path = getCreatePath(baseApiPath, API, suffix);
         final String templateName = "Service.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, servicePath, mapperFile, dataMap);
+        generateFileByTemplate(templateName, API, mapperFile, dataMap);
     }
 
     private void generateRepositoryFile(ResultSet resultSet) throws Exception {
@@ -307,12 +293,12 @@ public class CodeGenerateUtils {
      */
     private void generateDaoFile(ResultSet resultSet) throws Exception {
         final String suffix = "Mapper.java";
-        String path = getCreatePath(baseDaoPath, daoPath, suffix);
+        String path = getCreatePath(baseDaoPath, DAO, suffix);
         final String templateName = "Mapper.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, daoPath, mapperFile, dataMap);
+        generateFileByTemplate(templateName, MODEL + SLASH + DAO, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Mapper.java 完成 >>>>>>>>>>>");
     }
 
@@ -321,7 +307,8 @@ public class CodeGenerateUtils {
      */
     private void generateMapperFile(ResultSet resultSet) throws Exception {
         final String suffix = "Mapper.xml";
-        String path = getCreatePath(baseMapperXmlPath, mapperXmlPath, suffix);
+        String baseMapperPath = projectName + RAIL + DAO + RESOURCES_PREFIX;
+        String path = getCreatePath(baseMapperPath, MAPPER, suffix);
         final String templateName = "Mapper.xml.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
@@ -338,20 +325,23 @@ public class CodeGenerateUtils {
         Template template = FreeMarkerTemplateUtils.getTemplate(templateName);
         FileOutputStream fos = new FileOutputStream(file);
         dataMap.put("serialVersionUID", getSerialVersionUID());
+        // 小写
         dataMap.put("table_name_small", tableName);
+        // 首字母大写驼峰
         dataMap.put("table_name", changeTableName);
+        // 首字母小写驼峰
         dataMap.put("lower_table_name", StrUtil.lowerFirst(changeTableName));
         dataMap.put("author", AUTHOR);
         dataMap.put("date", DateUtil.formatDateTime(new Date()));
         dataMap.put("primary_key_field", primaryKeyFieldName);
-        dataMap.put("dto_package_name", getSuffixPackageName(dtoPath));
-        dataMap.put("vo_package_name", getSuffixPackageName(voPath));
-        dataMap.put("entity_package_name", getSuffixPackageName(entityPath));
+        dataMap.put("dto_package_name", getSuffixPackageName(MODEL + SLASH + DTO));
+        dataMap.put("vo_package_name", getSuffixPackageName(MODEL + SLASH + VO));
+        dataMap.put("entity_package_name", getSuffixPackageName(MODEL + SLASH + ENTITY));
         dataMap.put("package_name", getSuffixPackageName(packagePath));
-        dataMap.put("api_package_name", getSuffixPackageName(servicePath));
-        dataMap.put("service_package_name", getSuffixPackageName(serviceImplPath));
-        dataMap.put("converter_package_name", getSuffixPackageName(converterPath));
-        dataMap.put("dao_package_name", getSuffixPackageName(daoPath));
+        dataMap.put("api_package_name", getSuffixPackageName(MODEL + SLASH + API));
+        dataMap.put("service_package_name", getSuffixPackageName(MODEL + SLASH + SERVICE));
+        dataMap.put("converter_package_name", getSuffixPackageName(MODEL + SLASH + CONVERTER));
+        dataMap.put("dao_package_name", getSuffixPackageName(MODEL + SLASH + DAO));
         // dataMap.put("table_annotation", tableAnnotation);
         Writer out = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8), 10240);
         template.process(dataMap, out);

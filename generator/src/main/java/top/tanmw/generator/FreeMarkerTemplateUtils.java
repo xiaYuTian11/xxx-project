@@ -1,3 +1,5 @@
+package top.tanmw.generator;
+
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.NullCacheStorage;
 import freemarker.template.Configuration;

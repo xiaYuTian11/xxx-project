@@ -1,3 +1,5 @@
+package top.tanmw.generator;
+
 /**
  * 数据库字段封装类
  *
