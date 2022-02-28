@@ -26,7 +26,7 @@ public class CodeGenerateUtils {
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
     private final String showTablesSql = "SHOW TABLES;";
-    private final String basePath = "D:\\java\\ideaWorkingSpace\\work\\zenith\\zenith-front";
+    private final String basePath = "C:\\Users\\tmw\\Desktop\\test";
     private final String projectName = "xxx";
 
     private final String basePackageName = PROJECT_PREFIX + projectName;

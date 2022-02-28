@@ -25,48 +25,48 @@ public class ${table_name}Controller {
 @Autowired
 private ${table_name}Service ${lower_table_name}Service;
 
-/**
-* 新增
-*/
-@PostMapping("/save")
-public Result save(@Validated @RequestBody ${table_name}DTO dto) {
-String id = ${lower_table_name}Service.save(dto);
-return Objects.isNull(id) ? R.fail() : R.ok(id);
-}
+    /**
+    * 新增
+    */
+    @PostMapping("/save")
+    public Result save(@Validated @RequestBody ${table_name}DTO dto) {
+        String id = ${lower_table_name}Service.save(dto);
+        return Objects.isNull(id) ? R.fail() : R.ok(id);
+    }
 
-/**
-* 详情
-*/
-@PostMapping("/find/{id}")
-public Result find(@NotNull(message = "id 不能为空") @PathVariable String id) {
-${table_name}VO vo = ${lower_table_name}Service.findById(id);
-return R.ok(vo);
-}
+    /**
+    * 详情
+    */
+    @PostMapping("/find/{id}")
+    public Result find(@NotNull(message = "id 不能为空") @PathVariable String id) {
+        ${table_name}VO vo = ${lower_table_name}Service.findById(id);
+        return R.ok(vo);
+    }
 
-/**
-* 修改
-*/
-@PostMapping("/update")
-public Result update(@Validated @RequestBody ${table_name}DTO dto) {
-    boolean flag = ${lower_table_name}Service.update(dto);
-    return flag ? R.ok() : R.fail();
-}
+    /**
+    * 修改
+    */
+    @PostMapping("/update")
+    public Result update(@Validated @RequestBody ${table_name}DTO dto) {
+        boolean flag = ${lower_table_name}Service.update(dto);
+        return flag ? R.ok() : R.fail();
+    }
 
-/**
-* 删除
-*/
-@PostMapping("/delete/{id}")
-public Result delete(@NotNull(message = "id 不能为空") @PathVariable String id) {
-boolean flag = ${lower_table_name}Service.delete(id);
-return flag ? R.ok() : R.fail();
-}
+    /**
+    * 删除
+    */
+    @PostMapping("/delete/{id}")
+    public Result delete(@NotNull(message = "id 不能为空") @PathVariable String id) {
+        boolean flag = ${lower_table_name}Service.delete(id);
+        return flag ? R.ok() : R.fail();
+    }
 
-/**
-* 列表
-*/
-@PostMapping("/list")
-public Result list(@Validated @RequestBody ${table_name}ListDTO dto) {
-final Page<?> Page = ${lower_table_name}Service.list(dto);
-return R.ok(Page);
-}
+    /**
+    * 列表
+    */
+    @PostMapping("/list")
+    public Result list(@Validated @RequestBody ${table_name}ListDTO dto) {
+        final Page<?> Page = ${lower_table_name}Service.list(dto);
+        return R.ok(Page);
+    }
 }

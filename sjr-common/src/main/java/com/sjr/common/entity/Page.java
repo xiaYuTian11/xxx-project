@@ -12,7 +12,7 @@ public class Page<T> implements Serializable {
     private static final long serialVersionUID = -7102129155309986923L;
 
     private List<T> list;                // list result of this page
-    private int pageNumber;                // page number
+    private int pageNum;                // page number
     private int pageSize;                // result amount of this page
     private int totalPage;                // total page
     private int totalRow;                // total row
@@ -21,14 +21,14 @@ public class Page<T> implements Serializable {
      * Constructor.
      *
      * @param list       the list of paginate result
-     * @param pageNumber the page number
+     * @param pageNum the page number
      * @param pageSize   the page size
      * @param totalPage  the total page of paginate
      * @param totalRow   the total row of paginate
      */
-    public Page(List<T> list, int pageNumber, int pageSize, int totalPage, int totalRow) {
+    public Page(List<T> list, int pageNum, int pageSize, int totalPage, int totalRow) {
         this.list = list;
-        this.pageNumber = pageNumber;
+        this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.totalPage = totalPage;
         this.totalRow = totalRow;
@@ -52,12 +52,12 @@ public class Page<T> implements Serializable {
     /**
      * Return page number.
      */
-    public int getPageNumber() {
-        return pageNumber;
+    public int getPageNum() {
+        return pageNum;
     }
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
     /**
@@ -94,17 +94,17 @@ public class Page<T> implements Serializable {
     }
 
     public boolean isFirstPage() {
-        return pageNumber == 1;
+        return pageNum == 1;
     }
 
     public boolean isLastPage() {
-        return pageNumber >= totalPage;
+        return pageNum >= totalPage;
     }
 
     @Override
     public String toString() {
         StringBuilder msg = new StringBuilder();
-        msg.append("pageNumber : ").append(pageNumber);
+        msg.append("pageNumber : ").append(pageNum);
         msg.append("\npageSize : ").append(pageSize);
         msg.append("\ntotalPage : ").append(totalPage);
         msg.append("\ntotalRow : ").append(totalRow);
