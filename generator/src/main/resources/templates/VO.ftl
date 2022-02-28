@@ -10,7 +10,6 @@ import java.util.Date;
 * @date ${date}
 */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class ${table_name}VO {
 
     private static final long serialVersionUID = ${serialVersionUID};
@@ -29,7 +28,8 @@ public class ${table_name}VO {
     <#if model.columnType = 'timestamp' >
     private Date ${model.changeColumnName?uncap_first};
     </#if>
-    <#if model.columnType = 'smallint' || model.columnType = 'int2' || model.columnType = 'int4' || model.columnType = 'Integer'>
+    <#if model.columnType = 'smallint' || model.columnType = 'int'  || model.columnType = 'int2'
+    || model.columnType = 'int4' || model.columnType = 'Integer' || model.columnType = 'bit'>
     private Integer ${model.changeColumnName?uncap_first};
     </#if>
     <#if model.columnType = 'numeric'>

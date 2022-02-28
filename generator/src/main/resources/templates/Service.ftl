@@ -1,6 +1,5 @@
 package ${package_name};
 
-com.baomidou.mybatisplus.extension.plugins.pagination
 import com.sjr.common.entity.Result;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;

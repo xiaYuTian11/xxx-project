@@ -21,12 +21,12 @@ import static top.tanmw.generator.PathConstants.*;
  */
 public class CodeGenerateUtils {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
     private final String showTablesSql = "SHOW TABLES;";
-    private final String basePath = "C:\\Users\\tmw\\Desktop\\test";
+    private final String basePath = "D:\\java\\ideaWorkingSpace\\my\\xxx-project";
     private final String projectName = "xxx";
 
     private final String basePackageName = PROJECT_PREFIX + projectName;
@@ -62,6 +62,10 @@ public class CodeGenerateUtils {
      * 表对应的类名，表名转驼峰首字母大写
      */
     private String changeTableName;
+    /**
+     * 模块描述
+     */
+    private String tableDescribe;
 
     public Connection getConnection() throws Exception {
         Class.forName(DRIVER);
@@ -148,7 +152,6 @@ public class CodeGenerateUtils {
         if (StrUtil.isBlank(packagePath)) {
             return "";
         }
-        packagePath = basePackagePath + SLASH + packagePath;
         StringBuilder sb = new StringBuilder();
         if (packagePath.contains(SLASH)) {
             final String[] split = packagePath.split(SLASH);
@@ -157,7 +160,7 @@ public class CodeGenerateUtils {
             }
             return basePackageName + DOT + sb.substring(0, sb.length() - 1);
         }
-        return packagePath;
+        return basePackageName + DOT + packagePath;
     }
 
     private void generateModelFile(ResultSet resultSet) throws Exception {
@@ -298,7 +301,7 @@ public class CodeGenerateUtils {
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, MODEL + SLASH + DAO, mapperFile, dataMap);
+        generateFileByTemplate(templateName, DAO, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Mapper.java 完成 >>>>>>>>>>>");
     }
 
@@ -332,16 +335,17 @@ public class CodeGenerateUtils {
         // 首字母小写驼峰
         dataMap.put("lower_table_name", StrUtil.lowerFirst(changeTableName));
         dataMap.put("author", AUTHOR);
+        dataMap.put("table_describe", tableDescribe);
         dataMap.put("date", DateUtil.formatDateTime(new Date()));
         dataMap.put("primary_key_field", primaryKeyFieldName);
-        dataMap.put("dto_package_name", getSuffixPackageName(MODEL + SLASH + DTO));
-        dataMap.put("vo_package_name", getSuffixPackageName(MODEL + SLASH + VO));
-        dataMap.put("entity_package_name", getSuffixPackageName(MODEL + SLASH + ENTITY));
+        dataMap.put("dto_package_name", getSuffixPackageName(DTO));
+        dataMap.put("vo_package_name", getSuffixPackageName(VO));
+        dataMap.put("entity_package_name", getSuffixPackageName(ENTITY));
         dataMap.put("package_name", getSuffixPackageName(packagePath));
-        dataMap.put("api_package_name", getSuffixPackageName(MODEL + SLASH + API));
-        dataMap.put("service_package_name", getSuffixPackageName(MODEL + SLASH + SERVICE));
-        dataMap.put("converter_package_name", getSuffixPackageName(MODEL + SLASH + CONVERTER));
-        dataMap.put("dao_package_name", getSuffixPackageName(MODEL + SLASH + DAO));
+        dataMap.put("api_package_name", getSuffixPackageName(API));
+        dataMap.put("service_package_name", getSuffixPackageName(SERVICE));
+        dataMap.put("converter_package_name", getSuffixPackageName(CONVERTER));
+        dataMap.put("dao_package_name", getSuffixPackageName(DAO));
         // dataMap.put("table_annotation", tableAnnotation);
         Writer out = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8), 10240);
         template.process(dataMap, out);

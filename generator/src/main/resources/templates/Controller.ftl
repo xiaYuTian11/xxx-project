@@ -1,17 +1,14 @@
 package ${package_name};
 
-com.baomidou.mybatisplus.extension.plugins.pagination
 import com.sjr.common.entity.Result;
 import ${api_package_name}.${table_name}Service;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;
-import ${vo_package_name}.${table_name}VO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
 * @author ${author}
@@ -22,16 +19,15 @@ import java.util.Objects;
 @Validated
 public class ${table_name}Controller {
 
-@Autowired
-private ${table_name}Service ${lower_table_name}Service;
+    @Autowired
+    private ${table_name}Service ${lower_table_name}Service;
 
     /**
     * 新增
     */
     @PostMapping("/save")
     public Result save(@Validated @RequestBody ${table_name}DTO dto) {
-        String id = ${lower_table_name}Service.save(dto);
-        return Objects.isNull(id) ? R.fail() : R.ok(id);
+        return ${lower_table_name}Service.save(dto);
     }
 
     /**
@@ -39,8 +35,7 @@ private ${table_name}Service ${lower_table_name}Service;
     */
     @PostMapping("/find/{id}")
     public Result find(@NotNull(message = "id 不能为空") @PathVariable String id) {
-        ${table_name}VO vo = ${lower_table_name}Service.findById(id);
-        return R.ok(vo);
+        return ${lower_table_name}Service.findById(id);
     }
 
     /**
@@ -48,8 +43,7 @@ private ${table_name}Service ${lower_table_name}Service;
     */
     @PostMapping("/update")
     public Result update(@Validated @RequestBody ${table_name}DTO dto) {
-        boolean flag = ${lower_table_name}Service.update(dto);
-        return flag ? R.ok() : R.fail();
+        return ${lower_table_name}Service.update(dto);
     }
 
     /**
@@ -57,8 +51,7 @@ private ${table_name}Service ${lower_table_name}Service;
     */
     @PostMapping("/delete/{id}")
     public Result delete(@NotNull(message = "id 不能为空") @PathVariable String id) {
-        boolean flag = ${lower_table_name}Service.delete(id);
-        return flag ? R.ok() : R.fail();
+        return ${lower_table_name}Service.delete(id);
     }
 
     /**
@@ -66,7 +59,6 @@ private ${table_name}Service ${lower_table_name}Service;
     */
     @PostMapping("/list")
     public Result list(@Validated @RequestBody ${table_name}ListDTO dto) {
-        final Page<?> Page = ${lower_table_name}Service.list(dto);
-        return R.ok(Page);
+        return ${lower_table_name}Service.list(dto);
     }
 }

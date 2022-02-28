@@ -8,6 +8,7 @@ public enum ResultEnum {
 
     FAILED(-1, "操作失败"),
     SUCCESS(200, "操作成功"),
+    DATA_NOT_EXIST(9998, "数据不存在"),
     ERROR(9999, "系统繁忙");
 
     ResultEnum(int code, String msg) {

@@ -10,9 +10,8 @@ import java.util.Date;
 * @date ${date}
 */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class ${table_name}ListDTO {
     private static final long serialVersionUID = ${serialVersionUID};
-    private int pageNum;
-    private int pageSize;
+    private Integer pageNum;
+    private Integer pageSize;
 }

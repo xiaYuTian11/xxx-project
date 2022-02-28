@@ -18,11 +18,6 @@
     <dependencies>
         <dependency>
             <groupId>top.tanmw</groupId>
-            <artifactId>sjr-common</artifactId>
-            <version>1.0-dev</version>
-        </dependency>
-        <dependency>
-            <groupId>top.tanmw</groupId>
             <artifactId>xxx-api</artifactId>
             <version>1.0-dev</version>
         </dependency>

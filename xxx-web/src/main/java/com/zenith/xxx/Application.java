@@ -1,4 +1,4 @@
-package com.sjr.xxx;
+package com.zenith.xxx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

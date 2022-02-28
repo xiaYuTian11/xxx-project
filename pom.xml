@@ -28,6 +28,8 @@
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
         <hutool.version>5.7.20</hutool.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
     <dependencies>
         <dependency>
@@ -45,6 +47,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 引入Swagger3依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -52,10 +64,10 @@
             <properties>
                 <env>dev</env>
                 <datasource.url>
-                    <![CDATA[jdbc:postgresql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                    <![CDATA[jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
                 <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
                 <datasource.username>root</datasource.username>
-                <datasource.password>zenithinfo123</datasource.password>
+                <datasource.password>123456</datasource.password>
                 <log-level>info</log-level>
                 <log-path>./logs</log-path>
                 <swagger-enable>true</swagger-enable>

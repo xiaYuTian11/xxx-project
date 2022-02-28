@@ -3,18 +3,18 @@ package ${package_name};
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sjr.common.entity.Result;
+import com.sjr.common.entity.ResultEnum;
 import ${api_package_name}.${table_name}Service;
 import ${converter_package_name}.${table_name}Converter;
 import ${dao_package_name}.${table_name}Mapper;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;
 import ${entity_package_name}.${table_name};
-import com.zenith.front.domain.vo.PageVOExt;
 import ${vo_package_name}.${table_name}VO;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -30,31 +30,33 @@ public class ${table_name}ServiceImpl extends ServiceImpl<${table_name}Mapper, $
     private ${table_name}Mapper ${lower_table_name}Mapper;
 
     @Override
-    public String save(${table_name}DTO dto) {
+    public Result save(${table_name}DTO dto) {
         ${table_name} entity = ${lower_table_name}Converter.dto2Entity(dto);
-        boolean save = this.save(entity);
-        return save ? entity.get${primary_key_field}() : null;
+        boolean flag = this.save(entity);
+        return flag ? Result.ok(entity.getId()) : Result.fail();
     }
 
     @Override
-    public ${table_name}VO findById(String id) {
+    public Result findById(String id) {
         ${table_name} entity = this.getById(id);
-        return Objects.isNull(entity) ? null : ${lower_table_name}Converter.entity2Vo(entity);
+        return Objects.isNull(entity) ? Result.build(ResultEnum.DATA_NOT_EXIST) : Result.ok(${lower_table_name}Converter.entity2Vo(entity));
     }
 
     @Override
-    public boolean update(${table_name}DTO dto) {
-        return this.updateById(${lower_table_name}Converter.dto2Entity(dto));
+    public Result update(${table_name}DTO dto) {
+        final boolean flag = this.updateById(${lower_table_name}Converter.dto2Entity(dto));
+        return flag ? Result.ok() : Result.fail();
     }
 
     @Override
-    public boolean delete(String id) {
-        return this.removeById(id);
+    public Result delete(String id) {
+        final boolean flag = this.removeById(id);
+        return flag ? Result.ok() : Result.fail();
     }
 
     @Override
-    public PageVO<?> list(${table_name}ListDTO dto) {
-    final Page<${table_name}> page = ${lower_table_name}Mapper.selectPage(new Page<>(dto.getCurrPage(), dto.getPageSize()), new QueryWrapper<>());
-        return page;
+    public Result list(${table_name}ListDTO dto) {
+        final Page<${table_name}> page = ${lower_table_name}Mapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), new QueryWrapper<>());
+        return Result.ok(page);
     }
 }
