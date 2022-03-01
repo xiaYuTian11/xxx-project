@@ -1,5 +1,11 @@
 package top.tanmw.generator;
 
+import cn.hutool.core.util.StrUtil;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 代码生成器模型
  *
@@ -43,6 +49,12 @@ public class GeneratorModel {
      * 工程名称
      */
     private String projectName;
+    /**
+     * 模式，single工程，multi 多模块
+     */
+    private String pattern;
+    private Set<String> includeSet;
+    private Set<String> excludeSet;
 
     public String getUrl() {
         return url;
@@ -114,5 +126,37 @@ public class GeneratorModel {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public String getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+
+    public Set<String> getIncludeSet() {
+        return includeSet;
+    }
+
+    public void setIncludeSet(String includeSet) {
+        if (StrUtil.isNotBlank(includeSet)) {
+            this.includeSet = new HashSet<>(Arrays.asList(includeSet.split(",")));
+        } else {
+            this.includeSet = new HashSet<>();
+        }
+    }
+
+    public Set<String> getExcludeSet() {
+        return excludeSet;
+    }
+
+    public void setExcludeSet(String excludeSet) {
+        if (StrUtil.isNotBlank(excludeSet)) {
+            this.excludeSet = new HashSet<>(Arrays.asList(excludeSet.split(",")));
+        } else {
+            this.excludeSet = new HashSet<>();
+        }
     }
 }

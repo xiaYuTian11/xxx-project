@@ -1,0 +1,16 @@
+url=jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+driver=com.mysql.cj.jdbc.Driver
+user=root
+password=123456
+dbName=front_0910
+showTablesSql=SHOW TABLES;
+showTablesCommentSql=
+## 注意文件路径采用反斜杠
+basePath=D:/java/ideaWorkingSpace/my/xxx-project
+projectName=xxx
+## 模式，single工程，multi 多模块，默认多模块
+pattern=multi
+## 包含表名，多个 英文逗号分隔
+includeSet=
+## 不包含表名，多个 英文逗号分隔
+excludeSet=

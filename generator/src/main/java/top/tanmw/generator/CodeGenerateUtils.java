@@ -21,29 +21,24 @@ import static top.tanmw.generator.PathConstants.*;
  */
 public class CodeGenerateUtils {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String USER = "root";
-    private static final String PASSWORD = "123456";
-    private final String showTablesSql = "SHOW TABLES;";
-    private final String basePath = "D:\\java\\ideaWorkingSpace\\my\\xxx-project";
-    private final String projectName = "xxx";
-
-    private final String basePackageName = PROJECT_PREFIX + projectName;
-    private final String basePackagePath = basePackageName.replaceAll("\\.", "/");
-    private final String baseControllerPath = projectName + RAIL + WEB + JAVA_PREFIX + basePackagePath;
-    private final String baseApiPath = projectName + RAIL + API + JAVA_PREFIX + basePackagePath;
-    private final String baseServicePath = projectName + RAIL + SERVICE + JAVA_PREFIX + basePackagePath;
-    private final String baseDaoPath = projectName + RAIL + DAO + JAVA_PREFIX + basePackagePath;
-    private final String baseModelPath = projectName + RAIL + MODEL + JAVA_PREFIX + basePackagePath;
-
+    private String url;
+    private String driver;
+    private String user;
+    private String password;
+    private String showTablesSql;
+    private String basePath;
+    private String projectName;
     // 优先
-    private final Set<String> includeSet = new HashSet<String>() {{
+    private Set<String> includeSet;
+    private Set<String> excludeSet;
 
-    }};
-    private final Set<String> excludeSet = new HashSet<String>() {{
-
-    }};
+    private String basePackageName;
+    private String basePackagePath;
+    private String baseControllerPath;
+    private String baseApiPath;
+    private String baseServicePath;
+    private String baseDaoPath;
+    private String baseModelPath;
 
     private final List<ColumnClass> columnClassList = new ArrayList<>();
     /**
@@ -68,8 +63,28 @@ public class CodeGenerateUtils {
     private String tableDescribe;
 
     public Connection getConnection() throws Exception {
-        Class.forName(DRIVER);
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        Class.forName(driver);
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    public void init(GeneratorModel generatorModel) {
+        url = generatorModel.getUrl();
+        driver = generatorModel.getDriver();
+        user = generatorModel.getUser();
+        password = generatorModel.getPassword();
+        showTablesSql = generatorModel.getShowTablesSql();
+        basePath = generatorModel.getBasePath();
+        projectName = generatorModel.getProjectName();
+        includeSet = generatorModel.getIncludeSet();
+        excludeSet = generatorModel.getExcludeSet();
+
+        basePackageName = PROJECT_PREFIX + projectName;
+        basePackagePath = basePackageName.replaceAll("\\.", "/");
+        baseControllerPath = projectName + RAIL + WEB + JAVA_PREFIX + basePackagePath;
+        baseApiPath = projectName + RAIL + API + JAVA_PREFIX + basePackagePath;
+        baseServicePath = projectName + RAIL + SERVICE + JAVA_PREFIX + basePackagePath;
+        baseDaoPath = projectName + RAIL + DAO + JAVA_PREFIX + basePackagePath;
+        baseModelPath = projectName + RAIL + MODEL + JAVA_PREFIX + basePackagePath;
     }
 
     public void generate() throws Exception {
@@ -89,6 +104,7 @@ public class CodeGenerateUtils {
             }
             for (String tableNameStr : tables) {
                 tableName = tableNameStr;
+                tableDescribe = "";
                 changeTableName = replaceUnderLineAndUpperCase(tableName);
                 columnClassList.clear();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();

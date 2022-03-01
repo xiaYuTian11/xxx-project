@@ -44,7 +44,7 @@ public class ${table_name}Controller {
     * 详情
     */
     @GetMapping("/find")
-    @ApiOperation(value = "详情", response = ${table_name}VO.class)
+    @ApiOperation(value = "详情", response = Result.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "数据唯一标识", required = true)
     })
