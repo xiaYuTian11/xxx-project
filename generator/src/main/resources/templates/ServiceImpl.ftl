@@ -18,15 +18,19 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
+* <p>
+* ${table_describe} 服务实现类
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */
 @Service
 public class ${table_name}ServiceImpl extends ServiceImpl<${table_name}Mapper, ${table_name}> implements ${table_name}Service {
 
-    @Resource
+    @Autowired
     private ${table_name}Converter ${lower_table_name}Converter;
-    @Resource
+    @Autowired
     private ${table_name}Mapper ${lower_table_name}Mapper;
 
     @Override

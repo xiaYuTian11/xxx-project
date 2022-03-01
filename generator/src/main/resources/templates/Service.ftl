@@ -8,6 +8,10 @@ import ${vo_package_name}.${table_name}VO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
+* <p>
+* ${table_describe} 服务Api
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */

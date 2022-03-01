@@ -8,6 +8,10 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 /**
+* <p>
+* ${table_describe} 模型转换器
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */

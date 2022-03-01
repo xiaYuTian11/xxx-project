@@ -6,6 +6,10 @@ import lombok.EqualsAndHashCode;
 import java.util.Date;
 
 /**
+* <p>
+* ${table_describe} VO
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */

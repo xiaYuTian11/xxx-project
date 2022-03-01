@@ -5,6 +5,10 @@ import ${entity_package_name}.${table_name};
 import org.apache.ibatis.annotations.Mapper;
 
 /**
+* <p>
+* ${table_describe} 持久层
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */

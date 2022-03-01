@@ -1,15 +1,21 @@
 package ${package_name};
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 /**
+* <p>
+* ${table_describe} DTO
+* </p>
+*
 * @author ${author}
 * @date ${date}
 */
 @Data
+@ApiModel("${table_describe}")
 public class ${table_name}DTO {
     private static final long serialVersionUID = ${serialVersionUID};
 
@@ -18,6 +24,7 @@ public class ${table_name}DTO {
     /**
     *${model.columnComment!}
     */
+    @ApiModelProperty(value = "${model.columnComment!}")
     <#if (model.columnType = 'BIGINT' || model.columnType = 'int8')>
     private Long ${model.changeColumnName?uncap_first};
     </#if>

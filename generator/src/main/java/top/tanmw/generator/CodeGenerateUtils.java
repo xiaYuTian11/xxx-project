@@ -165,11 +165,11 @@ public class CodeGenerateUtils {
 
     private void generateModelFile(ResultSet resultSet) throws Exception {
         final String suffix = ".java";
-        String path = getCreatePath(baseModelPath, "entity", suffix);
+        String path = getCreatePath(baseModelPath, MODEL + SLASH + ENTITY, suffix);
         final String templateName = "Model.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, "entity");
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, MODEL + SLASH + ENTITY);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + ".java 完成 >>>>>>>>>>>");
     }
 
@@ -211,42 +211,42 @@ public class CodeGenerateUtils {
 
     private void generateListDTOFile(ResultSet resultSet) throws Exception {
         final String suffix = "ListDTO.java";
-        String path = getCreatePath(baseModelPath, DTO, suffix);
+        String path = getCreatePath(baseModelPath, MODEL + SLASH + DTO, suffix);
         final String templateName = "ListDTO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, DTO);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, MODEL + SLASH + DTO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "ListDTO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateVOFile(ResultSet resultSet) throws Exception {
         final String suffix = "VO.java";
-        String path = getCreatePath(baseModelPath, VO, suffix);
+        String path = getCreatePath(baseModelPath, MODEL + SLASH + VO, suffix);
         final String templateName = "VO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, VO);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, MODEL + SLASH + VO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "VO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateDTOFile(ResultSet resultSet) throws Exception {
         final String suffix = "DTO.java";
-        String path = getCreatePath(baseModelPath, DTO, suffix);
+        String path = getCreatePath(baseModelPath, MODEL + SLASH + DTO, suffix);
         final String templateName = "DTO.ftl";
         File mapperFile = new File(path);
         this.checkFilePath(mapperFile);
-        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, DTO);
+        generateModelAndDTOAndVoFile(resultSet, templateName, mapperFile, MODEL + SLASH + DTO);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "DTO.java 完成 >>>>>>>>>>>");
     }
 
     private void generateConverterFile(ResultSet resultSet) throws Exception {
         final String suffix = "Converter.java";
-        String path = getCreatePath(baseModelPath, CONVERTER, suffix);
+        String path = getCreatePath(baseModelPath, MODEL + SLASH + CONVERTER, suffix);
         final String templateName = "Converter.ftl";
         File mapperFile = new File(path);
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, CONVERTER, mapperFile, dataMap);
+        generateFileByTemplate(templateName, MODEL + SLASH + CONVERTER, mapperFile, dataMap);
         System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Converter.java 完成 >>>>>>>>>>>");
     }
 
@@ -338,13 +338,13 @@ public class CodeGenerateUtils {
         dataMap.put("table_describe", tableDescribe);
         dataMap.put("date", DateUtil.formatDateTime(new Date()));
         dataMap.put("primary_key_field", primaryKeyFieldName);
-        dataMap.put("dto_package_name", getSuffixPackageName(DTO));
-        dataMap.put("vo_package_name", getSuffixPackageName(VO));
-        dataMap.put("entity_package_name", getSuffixPackageName(ENTITY));
+        dataMap.put("dto_package_name", getSuffixPackageName(MODEL + SLASH + DTO));
+        dataMap.put("vo_package_name", getSuffixPackageName(MODEL + SLASH + VO));
+        dataMap.put("entity_package_name", getSuffixPackageName(MODEL + SLASH + ENTITY));
         dataMap.put("package_name", getSuffixPackageName(packagePath));
         dataMap.put("api_package_name", getSuffixPackageName(API));
         dataMap.put("service_package_name", getSuffixPackageName(SERVICE));
-        dataMap.put("converter_package_name", getSuffixPackageName(CONVERTER));
+        dataMap.put("converter_package_name", getSuffixPackageName(MODEL + SLASH + CONVERTER));
         dataMap.put("dao_package_name", getSuffixPackageName(DAO));
         // dataMap.put("table_annotation", tableAnnotation);
         Writer out = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8), 10240);
