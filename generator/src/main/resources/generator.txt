@@ -2,11 +2,10 @@ url=jdbc:mysql://127.0.0.1:3306/front_0910?useUnicode=true&characterEncoding=utf
 driver=com.mysql.cj.jdbc.Driver
 user=root
 password=123456
-dbName=front_0910
-showTablesSql=SHOW TABLES;
-showTablesCommentSql=
+
 ## 注意文件路径采用反斜杠
 basePath=D:/java/ideaWorkingSpace/my/xxx-project
+## 包工程名称，com.sjr.controller,此处写 sjr
 projectName=xxx
 ## 模式，single工程，multi 多模块，默认多模块
 pattern=multi

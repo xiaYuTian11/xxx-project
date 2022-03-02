@@ -3,6 +3,8 @@ package top.tanmw.generator;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import freemarker.template.Template;
+import top.tanmw.generator.db.DbFactory;
+import top.tanmw.generator.db.DbQuery;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -12,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static top.tanmw.generator.PathConstants.*;
+import static top.tanmw.generator.ProjectPattern.SINGLE;
 
 /**
  * 代码生成器启动类，Generate.java暂时未作使用
@@ -25,7 +28,6 @@ public class CodeGenerateUtils {
     private String driver;
     private String user;
     private String password;
-    private String showTablesSql;
     private String basePath;
     private String projectName;
     // 优先
@@ -39,6 +41,9 @@ public class CodeGenerateUtils {
     private String baseServicePath;
     private String baseDaoPath;
     private String baseModelPath;
+    private String baseMapperPath;
+    private DbQuery dbQuery;
+    private ProjectPattern projectPattern;
 
     private final List<ColumnClass> columnClassList = new ArrayList<>();
     /**
@@ -72,7 +77,6 @@ public class CodeGenerateUtils {
         driver = generatorModel.getDriver();
         user = generatorModel.getUser();
         password = generatorModel.getPassword();
-        showTablesSql = generatorModel.getShowTablesSql();
         basePath = generatorModel.getBasePath();
         projectName = generatorModel.getProjectName();
         includeSet = generatorModel.getIncludeSet();
@@ -80,11 +84,27 @@ public class CodeGenerateUtils {
 
         basePackageName = PROJECT_PREFIX + projectName;
         basePackagePath = basePackageName.replaceAll("\\.", "/");
-        baseControllerPath = projectName + RAIL + WEB + JAVA_PREFIX + basePackagePath;
-        baseApiPath = projectName + RAIL + API + JAVA_PREFIX + basePackagePath;
-        baseServicePath = projectName + RAIL + SERVICE + JAVA_PREFIX + basePackagePath;
-        baseDaoPath = projectName + RAIL + DAO + JAVA_PREFIX + basePackagePath;
-        baseModelPath = projectName + RAIL + MODEL + JAVA_PREFIX + basePackagePath;
+        projectPattern = ProjectPattern.getPattern(generatorModel.getPattern());
+        if (Objects.equals(SINGLE, projectPattern)) {
+            // 单工程
+            baseControllerPath = JAVA_PREFIX + basePackagePath;
+            baseApiPath = JAVA_PREFIX + basePackagePath;
+            baseServicePath = JAVA_PREFIX + basePackagePath;
+            baseDaoPath = JAVA_PREFIX + basePackagePath;
+            baseModelPath = JAVA_PREFIX + basePackagePath;
+            baseMapperPath = RESOURCES_PREFIX;
+        } else {
+            // 多模块
+            baseControllerPath = projectName + RAIL + WEB + JAVA_PREFIX + basePackagePath;
+            baseApiPath = projectName + RAIL + API + JAVA_PREFIX + basePackagePath;
+            baseServicePath = projectName + RAIL + SERVICE + JAVA_PREFIX + basePackagePath;
+            baseDaoPath = projectName + RAIL + DAO + JAVA_PREFIX + basePackagePath;
+            baseMapperPath = projectName + RAIL + DAO + RESOURCES_PREFIX;
+            baseModelPath = projectName + RAIL + MODEL + JAVA_PREFIX + basePackagePath;
+        }
+
+        dbQuery = DbFactory.getDbQuery(generatorModel.getUrl());
+
     }
 
     public void generate() throws Exception {
@@ -92,6 +112,7 @@ public class CodeGenerateUtils {
         try {
             connection = getConnection();
             Set<String> tables = findTables(connection);
+            Map<String, String> tableCommentMap = findTableComment(connection);
             final Set<String> lowerCaseSet = includeSet.stream().map(String::toLowerCase).collect(Collectors.toSet());
             if (lowerCaseSet.size() > 0) {
                 tables = tables.stream().filter(lowerCaseSet::contains).collect(Collectors.toSet());
@@ -104,7 +125,7 @@ public class CodeGenerateUtils {
             }
             for (String tableNameStr : tables) {
                 tableName = tableNameStr;
-                tableDescribe = "";
+                tableDescribe = tableCommentMap.get(tableNameStr);
                 changeTableName = replaceUnderLineAndUpperCase(tableName);
                 columnClassList.clear();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -148,7 +169,7 @@ public class CodeGenerateUtils {
 
     public Set<String> findTables(Connection connection) throws SQLException {
         Set<String> set = new HashSet<>();
-        PreparedStatement ps = connection.prepareStatement(showTablesSql);
+        PreparedStatement ps = connection.prepareStatement(dbQuery.getShowTablesSql());
         final ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {
             final String tableName = resultSet.getString(1);
@@ -158,6 +179,18 @@ public class CodeGenerateUtils {
             throw new RuntimeException("未在指定数据库中发现可用表！");
         }
         return set;
+    }
+
+    public Map<String, String> findTableComment(Connection connection) throws SQLException {
+        Map<String, String> map = new HashMap<>(16);
+        PreparedStatement ps = connection.prepareStatement(dbQuery.getShowTablesCommentSql());
+        final ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            String tableName = resultSet.getString(1);
+            String tableComment = resultSet.getString(2);
+            map.put(tableName, tableComment);
+        }
+        return map;
     }
 
     private String getCreatePath(String baseFilePath, String filePath, String suffix) {
@@ -326,7 +359,6 @@ public class CodeGenerateUtils {
      */
     private void generateMapperFile(ResultSet resultSet) throws Exception {
         final String suffix = "Mapper.xml";
-        String baseMapperPath = projectName + RAIL + DAO + RESOURCES_PREFIX;
         String path = getCreatePath(baseMapperPath, MAPPER, suffix);
         final String templateName = "Mapper.xml.ftl";
         File mapperFile = new File(path);
