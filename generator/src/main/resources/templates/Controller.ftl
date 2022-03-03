@@ -1,6 +1,8 @@
 package ${package_name};
 
 import com.sjr.common.entity.Result;
+import com.sjr.common.log.Log;
+import com.sjr.common.log.OptTypeEnum;
 import ${api_package_name}.${table_name}Service;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;
@@ -34,6 +36,7 @@ public class ${table_name}Controller {
     /**
     * 新增
     */
+    @Log(optType = OptTypeEnum.INSERT)
     @PostMapping("/save")
     @ApiOperation(value = "保存", response = Result.class)
     public Result save(@Validated @RequestBody ${table_name}DTO dto) {
@@ -43,6 +46,7 @@ public class ${table_name}Controller {
     /**
     * 详情
     */
+    @Log(optType = OptTypeEnum.QUERY)
     @GetMapping("/find")
     @ApiOperation(value = "详情", response = Result.class)
     @ApiImplicitParams({
@@ -55,6 +59,7 @@ public class ${table_name}Controller {
     /**
     * 修改
     */
+    @Log(optType = OptTypeEnum.UPDATE)
     @PostMapping("/update")
     @ApiOperation(value = "修改", response = Result.class)
     public Result update(@Validated @RequestBody ${table_name}DTO dto) {
@@ -64,6 +69,7 @@ public class ${table_name}Controller {
     /**
     * 删除
     */
+    @Log(optType = OptTypeEnum.DELETE)
     @GetMapping("/delete")
     @ApiOperation(value = "删除", response = Result.class)
     @ApiImplicitParams({
@@ -76,6 +82,7 @@ public class ${table_name}Controller {
     /**
     * 列表
     */
+    @Log(optType = OptTypeEnum.PAGE)
     @PostMapping("/list")
     @ApiOperation(value = "列表", response = Result.class)
     public Result list(@Validated @RequestBody ${table_name}ListDTO dto) {

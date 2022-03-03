@@ -9,6 +9,7 @@ package com.sjr.common.log;
 public enum OptTypeEnum {
 
     QUERY(1, "查询"),
+    PAGE(1, "查询列表"),
     INSERT(2, "新增"),
     UPDATE(3, "修改"),
     DELETE(4, "删除"),
