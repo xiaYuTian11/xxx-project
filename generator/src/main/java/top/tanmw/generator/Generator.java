@@ -2,6 +2,8 @@ package top.tanmw.generator;
 
 import cn.hutool.core.util.StrUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -14,11 +16,12 @@ import static top.tanmw.generator.ProjectPattern.MULTI;
 public class Generator {
 
     public static void main(String[] args) throws Exception {
+        final String url = Generator.class.getClassLoader().getResource("generator.txt").getPath().toString();
+        run(url);
+    }
 
-        Properties properties = new Properties();
-        InputStream in = Generator.class.getClassLoader().getResourceAsStream("generator.txt");
-        properties.load(in);
-
+    public static void run(String url) throws Exception {
+        final Properties properties = getProperties(url);
         GeneratorModel model = new GeneratorModel();
         model.setUrl(properties.getProperty("url"));
         model.setDriver(properties.getProperty("driver"));
@@ -46,4 +49,13 @@ public class Generator {
         codeGenerateUtils.init(model);
         codeGenerateUtils.generate();
     }
+
+    public static Properties getProperties(String url) throws Exception {
+        Properties properties = new Properties();
+        File file = new File(url);
+        InputStream in = new FileInputStream(file);
+        properties.load(in);
+        return properties;
+    }
+
 }
