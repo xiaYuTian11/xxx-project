@@ -3,12 +3,12 @@ driver=com.mysql.cj.jdbc.Driver
 user=root
 password=123456
 
-## 注意文件路径采用反斜杠
-basePath=D:/java/ideaWorkingSpace/my/xxx-project
-## 包工程名称，com.sjr.controller,此处写 sjr
-projectName=xxx
+## 注意文件路径采用反斜杠,默认当前工程路径
+basePath=
+## 包工程名称，com.zenith.controller,此处写 zenith,默认 zenith
+projectName=
 ## 模式，single工程，multi 多模块，默认多模块
-pattern=multi
+pattern=
 ## 包含表名，多个 英文逗号分隔
 includeSet=
 ## 不包含表名，多个 英文逗号分隔

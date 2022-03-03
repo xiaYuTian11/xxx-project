@@ -1,7 +1,11 @@
 package top.tanmw.generator;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.io.InputStream;
 import java.util.Properties;
+
+import static top.tanmw.generator.ProjectPattern.MULTI;
 
 /**
  * @author TMW
@@ -24,8 +28,18 @@ public class Generator {
         model.setShowTablesSql(properties.getProperty("showTablesSql"));
         model.setShowTablesCommentSql(properties.getProperty("showTablesCommentSql"));
         model.setBasePath(properties.getProperty("basePath"));
+        if (StrUtil.isBlank(model.getBasePath())) {
+            String sp1 = System.getProperty("user.dir");
+            model.setBasePath(sp1);
+        }
         model.setProjectName(properties.getProperty("projectName"));
+        if (StrUtil.isBlank(model.getProjectName())) {
+            model.setProjectName("zenith");
+        }
         model.setPattern(properties.getProperty("pattern"));
+        if (StrUtil.isBlank(model.getPattern())) {
+            model.setPattern(MULTI.getDesc());
+        }
         model.setIncludeSet(properties.getProperty("includeSet"));
         model.setExcludeSet(properties.getProperty("excludeSet"));
         CodeGenerateUtils codeGenerateUtils = new CodeGenerateUtils();
