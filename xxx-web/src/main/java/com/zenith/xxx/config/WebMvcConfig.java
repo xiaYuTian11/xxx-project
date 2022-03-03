@@ -1,7 +1,10 @@
 package com.zenith.xxx.config;
 
+import com.zenith.xxx.interceptor.PermissionInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -15,10 +18,18 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private PermissionInterceptor permissionInterceptor;
     /**
      * 默认拦截器排除资源
      */
-    private final List<String> excludePaths = Arrays.asList("classpath:/static/");
+    private final List<String> excludePaths = Arrays.asList("/login", "classpath:/static/");
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(permissionInterceptor).addPathPatterns("/**")
+                .excludePathPatterns(excludePaths);
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
