@@ -103,6 +103,7 @@
         <appender-ref ref="errorLog"/>
     </appender>
 
+    <Logger name="com.zenith.xxx.dao" level="debug" />
     <!-- 指定最基础的日志输出级别 -->
     <root level="${log.level}">
         <!-- appender 将会添加到这个 loger -->
