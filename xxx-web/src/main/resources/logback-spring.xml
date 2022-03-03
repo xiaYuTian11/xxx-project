@@ -21,7 +21,7 @@
         </encoder>
         <!-- 过滤器 -->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>debug</level>
         </filter>
     </appender>
 
@@ -102,8 +102,12 @@
         <!-- 添加附加的 appender, 最多只能添加一个 -->
         <appender-ref ref="errorLog"/>
     </appender>
-
-    <Logger name="com.zenith.xxx.dao" level="debug" />
+    <!--mybatis log configure-->
+    <logger name="com.apache.ibatis" level="TRACE"/>
+<!--    <Logger name="com.zenith.xxx.dao" level="debug" >-->
+<!--        <appender-ref ref="console"/>-->
+<!--        <appender-ref ref="asyncLog"/>-->
+<!--    </Logger>-->
     <!-- 指定最基础的日志输出级别 -->
     <root level="${log.level}">
         <!-- appender 将会添加到这个 loger -->

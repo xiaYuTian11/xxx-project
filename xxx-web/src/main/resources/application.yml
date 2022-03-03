@@ -65,10 +65,7 @@ mybatis-plus:
 logging:
   config: classpath:logback-spring.xml
   level:
-    com:
-      zenith:
-        xxx:
-          dao: debug
+    com.zenith.xxx.dao: debug
 
 custom:
   log:
