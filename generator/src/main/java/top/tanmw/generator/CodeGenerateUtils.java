@@ -1,5 +1,6 @@
 package top.tanmw.generator;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import freemarker.template.Template;
@@ -33,6 +34,7 @@ public class CodeGenerateUtils {
     // 优先
     private Set<String> includeSet;
     private Set<String> excludeSet;
+    private Set<String> excludePrefix;
 
     private String basePackageName;
     private String basePackagePath;
@@ -81,7 +83,7 @@ public class CodeGenerateUtils {
         projectName = generatorModel.getProjectName();
         includeSet = generatorModel.getIncludeSet();
         excludeSet = generatorModel.getExcludeSet();
-
+        excludePrefix = generatorModel.getExcludePrefix();
         basePackageName = PROJECT_PREFIX + projectName;
         basePackagePath = basePackageName.replaceAll("\\.", "/");
         projectPattern = ProjectPattern.getPattern(generatorModel.getPattern());
@@ -126,7 +128,16 @@ public class CodeGenerateUtils {
             for (String tableNameStr : tables) {
                 tableName = tableNameStr;
                 tableDescribe = tableCommentMap.get(tableNameStr);
-                changeTableName = replaceUnderLineAndUpperCase(tableName);
+                String noPrefixName = tableNameStr;
+                if (CollUtil.isNotEmpty(excludePrefix)) {
+                    for (String prefix : excludePrefix) {
+                        if (noPrefixName.startsWith(prefix)) {
+                            noPrefixName = noPrefixName.replaceFirst(prefix, "");
+                            break;
+                        }
+                    }
+                }
+                changeTableName = replaceUnderLineAndUpperCase(noPrefixName);
                 columnClassList.clear();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
                 ResultSet resultSet = databaseMetaData.getColumns(null, "%", tableName, "%");

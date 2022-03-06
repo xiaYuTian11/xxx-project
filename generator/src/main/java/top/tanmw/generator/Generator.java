@@ -43,6 +43,7 @@ public class Generator {
         if (StrUtil.isBlank(model.getPattern())) {
             model.setPattern(MULTI.getDesc());
         }
+        model.setExcludePrefix(properties.getProperty("excludePrefix"));
         model.setIncludeSet(properties.getProperty("includeSet"));
         model.setExcludeSet(properties.getProperty("excludeSet"));
         CodeGenerateUtils codeGenerateUtils = new CodeGenerateUtils();

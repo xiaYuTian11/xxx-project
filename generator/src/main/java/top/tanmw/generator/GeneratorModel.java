@@ -55,6 +55,27 @@ public class GeneratorModel {
     private String pattern;
     private Set<String> includeSet;
     private Set<String> excludeSet;
+    private Set<String> excludePrefix;
+
+    public void setIncludeSet(Set<String> includeSet) {
+        this.includeSet = includeSet;
+    }
+
+    public void setExcludeSet(Set<String> excludeSet) {
+        this.excludeSet = excludeSet;
+    }
+
+    public Set<String> getExcludePrefix() {
+        return excludePrefix;
+    }
+
+    public void setExcludePrefix(String excludePrefix) {
+        if (StrUtil.isNotBlank(excludePrefix)) {
+            this.excludePrefix = new HashSet<>(Arrays.asList(excludePrefix.split(",")));
+        } else {
+            this.excludePrefix = new HashSet<>();
+        }
+    }
 
     public String getUrl() {
         return url;
