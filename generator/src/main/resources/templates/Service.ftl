@@ -1,6 +1,6 @@
 package ${package_name};
 
-import com.sjr.common.entity.Result;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${dto_package_name}.${table_name}DTO;
 import ${dto_package_name}.${table_name}ListDTO;
 import ${entity_package_name}.${table_name};
@@ -19,25 +19,25 @@ public interface ${table_name}Service extends IService<${table_name}> {
     /***
     * 新增
     */
-    Result save(${table_name}DTO dto);
+    ${table_name} save(${table_name}DTO dto);
 
     /**
     * 详情
     */
-    Result findById(String id);
+    ${table_name}VO findById(String id);
 
     /**
     * 修改
     */
-    Result update(${table_name}DTO dto);
+    Boolean update(${table_name}DTO dto);
 
     /**
     * 删除
     */
-    Result delete(String id);
+    Boolean delete(String id);
 
     /**
     * 列表查询
     */
-    Result list(${table_name}ListDTO dto);
+    Page<${table_name}> list(${table_name}ListDTO dto);
 }

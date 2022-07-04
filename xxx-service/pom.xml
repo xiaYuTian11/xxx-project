@@ -26,5 +26,15 @@
             <artifactId>xxx-dao</artifactId>
             <version>1.0-dev</version>
         </dependency>
+        <!-- 添加ehcache支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <!-- Ehcache 坐标 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
     </dependencies>
 </project>

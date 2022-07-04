@@ -34,33 +34,31 @@ public class ${table_name}ServiceImpl extends ServiceImpl<${table_name}Mapper, $
     private ${table_name}Mapper ${lower_table_name}Mapper;
 
     @Override
-    public Result save(${table_name}DTO dto) {
+    public ${table_name} save(${table_name}DTO dto) {
         ${table_name} entity = ${lower_table_name}Converter.dto2Entity(dto);
         boolean flag = this.save(entity);
-        return flag ? Result.ok(entity.getId()) : Result.fail();
+        return entity;
     }
 
     @Override
-    public Result findById(String id) {
+    public ${table_name}VO findById(String id) {
         ${table_name} entity = this.getById(id);
-        return Objects.isNull(entity) ? Result.build(ResultEnum.DATA_NOT_EXIST) : Result.ok(${lower_table_name}Converter.entity2Vo(entity));
+        return ${lower_table_name}Converter.entity2Vo(entity);
     }
 
     @Override
-    public Result update(${table_name}DTO dto) {
-        final boolean flag = this.updateById(${lower_table_name}Converter.dto2Entity(dto));
-        return flag ? Result.ok() : Result.fail();
+    public Boolean update(${table_name}DTO dto) {
+        return this.updateById(${lower_table_name}Converter.dto2Entity(dto));
     }
 
     @Override
-    public Result delete(String id) {
-        final boolean flag = this.removeById(id);
-        return flag ? Result.ok() : Result.fail();
+    public Boolean delete(String id) {
+        return this.removeById(id);
     }
 
     @Override
-    public Result list(${table_name}ListDTO dto) {
+    public Page<${table_name}> list(${table_name}ListDTO dto) {
         final Page<${table_name}> page = ${lower_table_name}Mapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), new QueryWrapper<>());
-        return Result.ok(page);
+        return page;
     }
 }

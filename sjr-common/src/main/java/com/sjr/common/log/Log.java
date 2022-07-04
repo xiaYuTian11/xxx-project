@@ -19,6 +19,11 @@ public @interface Log {
     OptTypeEnum optType() default OptTypeEnum.OTHER;
 
     /**
+     * 模块
+     */
+    String module() default "";
+
+    /**
      * 操作说明
      */
     String desc() default "";

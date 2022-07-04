@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -50,11 +51,53 @@ public class GeneratorModel {
      */
     private String projectName;
     /**
+     * 是否覆盖
+     */
+    private boolean replace;
+    /**
      * 模式，single工程，multi 多模块
      */
     private String pattern;
+    private List<Integer> fileType;
     private Set<String> includeSet;
     private Set<String> excludeSet;
+    private Set<String> excludePrefix;
+
+    public List<Integer> getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(List<Integer> fileType) {
+        this.fileType = fileType;
+    }
+
+    public void setIncludeSet(Set<String> includeSet) {
+        this.includeSet = includeSet;
+    }
+
+    public void setExcludeSet(Set<String> excludeSet) {
+        this.excludeSet = excludeSet;
+    }
+
+    public Set<String> getExcludePrefix() {
+        return excludePrefix;
+    }
+
+    public void setExcludePrefix(String excludePrefix) {
+        if (StrUtil.isNotBlank(excludePrefix)) {
+            this.excludePrefix = new HashSet<>(Arrays.asList(excludePrefix.split(",")));
+        } else {
+            this.excludePrefix = new HashSet<>();
+        }
+    }
+
+    public boolean isReplace() {
+        return replace;
+    }
+
+    public void setReplace(boolean replace) {
+        this.replace = replace;
+    }
 
     public String getUrl() {
         return url;

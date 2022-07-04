@@ -1,10 +1,10 @@
 package com.zenith.xxx.config;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.sjr.common.constant.PermissionConstant;
 import com.sjr.common.log.Log;
 import com.sjr.common.util.JackSonUtil;
 import com.sjr.common.util.WebUtil;
+import com.zenith.xxx.constant.GlobalConstant;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -66,7 +66,7 @@ public class LogAop {
     private void recordLog(JoinPoint joinPoint, Object keys, Exception exception) {
         final String ip = WebUtil.getIP(request);
         final String requestUrl = request.getRequestURI();
-        final String token = request.getHeader(PermissionConstant.TOKEN);
+        final String token = request.getHeader(GlobalConstant.TOKEN);
         try {
             // 从切面织入点处通过反射机制获取织入点处的方法
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();

@@ -1,5 +1,6 @@
 package top.tanmw.generator;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import freemarker.template.Template;
@@ -33,6 +34,7 @@ public class CodeGenerateUtils {
     // 优先
     private Set<String> includeSet;
     private Set<String> excludeSet;
+    private Set<String> excludePrefix;
 
     private String basePackageName;
     private String basePackagePath;
@@ -43,6 +45,7 @@ public class CodeGenerateUtils {
     private String baseModelPath;
     private String baseMapperPath;
     private DbQuery dbQuery;
+    private Boolean isReplace;
     private ProjectPattern projectPattern;
 
     private final List<ColumnClass> columnClassList = new ArrayList<>();
@@ -50,6 +53,7 @@ public class CodeGenerateUtils {
      * 表名
      */
     private String tableName;
+    private List<Integer> fileType;
     /**
      * 主键名称
      */
@@ -58,6 +62,7 @@ public class CodeGenerateUtils {
      * 主键字段
      */
     private String primaryKeyFieldName;
+    private String primaryKeyFieldMethodName;
     /**
      * 表对应的类名，表名转驼峰首字母大写
      */
@@ -81,7 +86,9 @@ public class CodeGenerateUtils {
         projectName = generatorModel.getProjectName();
         includeSet = generatorModel.getIncludeSet();
         excludeSet = generatorModel.getExcludeSet();
-
+        excludePrefix = generatorModel.getExcludePrefix();
+        isReplace = generatorModel.isReplace();
+        fileType = generatorModel.getFileType();
         basePackageName = PROJECT_PREFIX + projectName;
         basePackagePath = basePackageName.replaceAll("\\.", "/");
         projectPattern = ProjectPattern.getPattern(generatorModel.getPattern());
@@ -113,7 +120,8 @@ public class CodeGenerateUtils {
             connection = getConnection();
             Set<String> tables = findTables(connection);
             Map<String, String> tableCommentMap = findTableComment(connection);
-            final Set<String> lowerCaseSet = includeSet.stream().map(String::toLowerCase).collect(Collectors.toSet());
+            // final Set<String> lowerCaseSet = includeSet.stream().map(String::toLowerCase).collect(Collectors.toSet());
+            final Set<String> lowerCaseSet = includeSet;
             if (lowerCaseSet.size() > 0) {
                 tables = tables.stream().filter(lowerCaseSet::contains).collect(Collectors.toSet());
             }
@@ -124,39 +132,74 @@ public class CodeGenerateUtils {
                 throw new RuntimeException("未发现可生成表");
             }
             for (String tableNameStr : tables) {
+                primaryKeyFieldName=null;
+                primaryKeyFieldMethodName=null;
                 tableName = tableNameStr;
-                tableDescribe = tableCommentMap.get(tableNameStr);
-                changeTableName = replaceUnderLineAndUpperCase(tableName);
+                tableDescribe = tableCommentMap.get(tableNameStr) == null ? tableName : tableCommentMap.get(tableNameStr);
+                String noPrefixName = tableNameStr.toLowerCase();
+                if (CollUtil.isNotEmpty(excludePrefix)) {
+                    for (String prefix : excludePrefix) {
+                        if (noPrefixName.toLowerCase().startsWith(prefix.toLowerCase())) {
+                            noPrefixName = noPrefixName.replaceFirst(prefix.toLowerCase(), "");
+                            break;
+                        }
+                    }
+                }
+                changeTableName = replaceUnderLineAndUpperCase(noPrefixName);
                 columnClassList.clear();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
-                ResultSet resultSet = databaseMetaData.getColumns(null, "%", tableName, "%");
+                ResultSet resultSet = dbQuery.getResultSet(databaseMetaData, tableName);
                 final ResultSet primaryKeys = databaseMetaData.getPrimaryKeys(null, null, tableName);
                 while (primaryKeys.next()) {
                     primaryKeyColumnName = primaryKeys.getString("COLUMN_NAME");
                     primaryKeyFieldName = replaceUnderLineAndUpperCase(primaryKeyColumnName);
                 }
-                //生成Mapper文件
-                generateMapperFile(resultSet);
-                //生成Dao文件
-                generateDaoFile(resultSet);
-                //生成Repository文件
-                // generateRepositoryFile(resultSet);
-                //生成服务层接口文件
-                generateServiceInterfaceFile(resultSet);
-                //生成服务实现层文件
-                generateServiceImplFile(resultSet);
-                //生成Controller层文件
-                generateControllerFile(resultSet);
-                //生成DTO文件
-                generateDTOFile(resultSet);
-                //生成ListDTO文件
-                generateListDTOFile(resultSet);
-                //生成VO文件
-                generateVOFile(resultSet);
-                //生成Model文件
-                generateModelFile(resultSet);
-                // 生成Converter文件
-                generateConverterFile(resultSet);
+                try {
+                    //生成Model文件
+                    if (fileType.contains(1)) {
+                        generateModelFile(resultSet);
+                    }
+                    //生成DTO文件
+                    if (fileType.contains(2)) {
+                        generateDTOFile(resultSet);
+                    }
+                    //生成ListDTO文件
+                    if (fileType.contains(3)) {
+                        generateListDTOFile(resultSet);
+                    }
+                    //生成VO文件
+                    if (fileType.contains(4)) {
+                        generateVOFile(resultSet);
+                    }
+                    // 生成Converter文件
+                    if (fileType.contains(5)) {
+                        generateConverterFile(resultSet);
+                    }
+                    //生成Mapper文件
+                    if (fileType.contains(6)) {
+                        generateMapperFile(resultSet);
+                    }
+                    //生成Dao文件
+                    if (fileType.contains(7)) {
+                        generateDaoFile(resultSet);
+                    }
+                    //生成Repository文件
+                    // generateRepositoryFile(resultSet);
+                    //生成服务层接口文件
+                    if (fileType.contains(8)) {
+                        generateServiceInterfaceFile(resultSet);
+                    }
+                    //生成服务实现层文件
+                    if (fileType.contains(9)) {
+                        generateServiceImplFile(resultSet);
+                    }
+                    //生成Controller层文件
+                    if (fileType.contains(10)) {
+                        generateControllerFile(resultSet);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -194,7 +237,8 @@ public class CodeGenerateUtils {
     }
 
     private String getCreatePath(String baseFilePath, String filePath, String suffix) {
-        return basePath + File.separator + baseFilePath + File.separator + filePath + File.separator + changeTableName + suffix;
+        final String path = basePath + File.separator + baseFilePath + File.separator + filePath + File.separator + changeTableName + suffix;
+        return path.replace("\\", "/");
     }
 
     private String getSuffixPackageName(String packagePath) {
@@ -234,15 +278,29 @@ public class CodeGenerateUtils {
                 // }
                 columnClass = new ColumnClass();
                 //获取字段名称
-                final String columnName = resultSet.getString("COLUMN_NAME");
+                String columnName = resultSet.getString("COLUMN_NAME");
                 columnClass.setColumnName(columnName);
                 //获取字段类型
                 columnClass.setColumnType(resultSet.getString("TYPE_NAME").toLowerCase());
                 //转换字段名称，如 sys_name 变成 SysName
+                if (StrUtil.isUpperCase(columnName)) {
+                    // 全部大写转换成消息
+                    columnName = columnName.toLowerCase();
+                }
+                // 替换特殊字符
+                columnName = columnName.replaceAll("#", "");
                 columnClass.setChangeColumnName(replaceUnderLineAndUpperCase(columnName));
-                //字段在数据库的注释
-                columnClass.setColumnComment(resultSet.getString("REMARKS"));
-                columnClass.setPrimaryKey(StrUtil.equals(columnName, primaryKeyColumnName));
+                // 字段在数据库的注释
+                String remarks = resultSet.getString("REMARKS");
+                if (StrUtil.isNotBlank(remarks) && (remarks.contains("\r") || remarks.contains("\n"))) {
+                    remarks = remarks.replace("\r", " ").replace("\n", " ");
+                }
+                columnClass.setColumnComment(remarks);
+                final boolean equals = StrUtil.equals(columnClass.getColumnName(), primaryKeyColumnName);
+                if(equals){
+                    primaryKeyFieldMethodName = StrUtil.upperFirst(columnClass.getChangeColumnName());
+                }
+                columnClass.setPrimaryKey(equals);
                 columnClassList.add(columnClass);
             }
         }
@@ -329,6 +387,7 @@ public class CodeGenerateUtils {
         checkFilePath(mapperFile);
         Map<String, Object> dataMap = new HashMap<>();
         generateFileByTemplate(templateName, API, mapperFile, dataMap);
+        System.out.println("<<<<<<<<<<<< 生成 " + changeTableName + "Service.java 完成 >>>>>>>>>>>");
     }
 
     private void generateRepositoryFile(ResultSet resultSet) throws Exception {
@@ -386,6 +445,7 @@ public class CodeGenerateUtils {
         dataMap.put("table_describe", tableDescribe);
         dataMap.put("date", DateUtil.formatDateTime(new Date()));
         dataMap.put("primary_key_field", primaryKeyFieldName);
+        dataMap.put("primary_key_field_method", primaryKeyFieldMethodName);
         dataMap.put("dto_package_name", getSuffixPackageName(MODEL + SLASH + DTO));
         dataMap.put("vo_package_name", getSuffixPackageName(MODEL + SLASH + VO));
         dataMap.put("entity_package_name", getSuffixPackageName(MODEL + SLASH + ENTITY));
@@ -402,6 +462,9 @@ public class CodeGenerateUtils {
     private void checkFilePath(File file) {
         if (!file.exists()) {
             file.getParentFile().mkdirs();
+        }
+        if (!isReplace && file.exists()) {
+            throw new RuntimeException(String.format("路径下文件已存在，如需替换请修改配置！\r\n %s", file.getAbsolutePath()));
         }
     }
 

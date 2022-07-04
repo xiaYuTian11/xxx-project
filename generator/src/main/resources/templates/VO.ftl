@@ -1,5 +1,7 @@
 package ${package_name};
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +16,7 @@ import java.util.Date;
 * @date ${date}
 */
 @Data
+@ApiModel("${table_describe} 返回实体-${table_name}VO")
 public class ${table_name}VO {
 
     private static final long serialVersionUID = ${serialVersionUID};
@@ -23,20 +26,25 @@ public class ${table_name}VO {
     /**
     *${model.columnComment!}
     */
-    <#if (model.columnType = 'BIGINT' || model.columnType = 'int8')>
+    @ApiModelProperty(value = "${model.columnComment!}")
+    <#if (model.columnType = 'bigint' || model.columnType = 'int8')>
     private Long ${model.changeColumnName?uncap_first};
     </#if>
-    <#if (model.columnType = 'varchar' || model.columnType = 'text')>
+    <#if (model.columnType = 'varchar' || model.columnType = 'text' || model.columnType = 'varchar2'
+    || model.columnType = 'clob' || model.columnType = 'char' || model.columnType = 'longvarchar')>
     private String ${model.changeColumnName?uncap_first};
     </#if>
     <#if model.columnType = 'timestamp' >
     private Date ${model.changeColumnName?uncap_first};
     </#if>
     <#if model.columnType = 'smallint' || model.columnType = 'int'  || model.columnType = 'int2'
-    || model.columnType = 'int4' || model.columnType = 'Integer' || model.columnType = 'bit'>
+    || model.columnType = 'int4' || model.columnType = 'integer' || model.columnType = 'bit'>
     private Integer ${model.changeColumnName?uncap_first};
     </#if>
-    <#if model.columnType = 'numeric'>
+    <#if (model.columnType = 'binary')>
+    private Byte[] ${model.changeColumnName?uncap_first};
+    </#if>
+    <#if model.columnType = 'numeric' ||  model.columnType = 'decimal' ||  model.columnType = 'number'>
     private java.math.BigDecimal ${model.changeColumnName?uncap_first};
     </#if>
 </#list>

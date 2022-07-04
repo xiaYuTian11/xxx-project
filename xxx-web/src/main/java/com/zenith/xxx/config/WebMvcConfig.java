@@ -23,7 +23,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * 默认拦截器排除资源
      */
-    private final List<String> excludePaths = Arrays.asList("/login", "classpath:/static/");
+    private final List<String> excludePaths = Arrays.asList("/login", "classpath:/static/",
+            "classpath:/public/", "/upload/**", "/download/**");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -33,8 +34,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("classpath:/static/upload/");
+        registry.addResourceHandler("/download/**")
+                .addResourceLocations("classpath:/static/download/");
+        // registry.addResourceHandler("/**")
+        //         .addResourceLocations("classpath:/public/");
         // 映射webjars 资源
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");

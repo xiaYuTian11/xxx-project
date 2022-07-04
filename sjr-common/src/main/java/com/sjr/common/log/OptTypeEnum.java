@@ -8,17 +8,20 @@ package com.sjr.common.log;
  */
 public enum OptTypeEnum {
 
+    NULL(0, "0"),
     QUERY(1, "查询"),
-    PAGE(1, "查询列表"),
-    INSERT(2, "新增"),
-    UPDATE(3, "修改"),
-    DELETE(4, "删除"),
-    EXPORT(7, "导出"),
-    IMPORT(8, "导入"),
-    LOGIN(11, "登录"),
-    LOGINOUT(12, "退出"),
-    DOWNLOAD(14, "下载"),
-    OTHER(0, "其他");
+    PAGE(2, "查询列表"),
+    INSERT(3, "新增"),
+    UPDATE(4, "修改"),
+    DELETE(5, "删除"),
+    EXPORT(6, "下载文件"),
+    IMPORT(7, "上传文件"),
+    LOGIN(8, "登录"),
+    LOGOUT(9, "退出"),
+    DOWNLOAD(10, "下载"),
+    OTHER(11, "其他"),
+    CHECK(12, "审核"),
+    SAVE(13, "保存");
 
     private Integer value;
     private String text;
