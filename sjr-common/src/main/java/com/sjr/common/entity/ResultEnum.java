@@ -8,7 +8,10 @@ public enum ResultEnum {
 
     FAILED(-1, "操作失败"),
     SUCCESS(200, "操作成功"),
-
+    /**
+     * 系统相关
+     */
+    NOT_CHECK_FILE(9800, "请先选择文件！"),
     NOT_LOGIN(9994, "用户未登录"),
     REQUEST_PATH_ERROR(9995, "请求路径错误"),
     NOT_PERMISSION(9996, "权限不足"),
