@@ -1,9 +1,9 @@
 package com.zenith.controller.base;
 
+import com.sjr.common.entity.DataProgressVo;
 import com.sjr.common.entity.Result;
-import com.zenith.bbsmz.model.constant.CacheConstant;
-import com.zenith.bbsmz.model.vo.DataProgressVo;
-import com.zenith.bbsmz.util.CacheUtil;
+import com.zenith.xxx.constant.CacheConstant;
+import com.zenith.xxx.util.CacheUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

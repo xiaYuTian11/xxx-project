@@ -39,14 +39,14 @@
             <artifactId>aspose-cells</artifactId>
             <version>${aspose-cells}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../lib/aspose-cells-21.11.jar</systemPath>
+            <systemPath>${basedir}/lib/aspose-cells-21.11.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>aspose-word</groupId>
             <artifactId>aspose-word</artifactId>
             <version>${aspose-word.version}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../lib/aspose-words-21.11.0-jdk17.jar</systemPath>
+            <systemPath>${basedir}/lib/aspose-words-21.11.0-jdk17.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
