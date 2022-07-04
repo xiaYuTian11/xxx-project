@@ -11,6 +11,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -30,8 +31,9 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     public static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler({RuntimeException.class})
-    public Result<?> handler(RuntimeException e) {
+    @ExceptionHandler({Exception.class})
+    @ResponseBody
+    public Result<?> handler(Exception e) {
         LOGGER.error("error: {}", e.getMessage(), e);
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
@@ -39,6 +41,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({Throwable.class})
+    @ResponseBody
     public Result<?> handler(Throwable e) {
         LOGGER.error("error: {}", e.getMessage(), e);
         StringWriter sw = new StringWriter();
@@ -51,6 +54,7 @@ public class GlobalExceptionHandler {
      * 处理请求参数格式错误 @RequestParam上validate失败后抛出的异常
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
+    @ResponseBody
     public Result<?> handler(ConstraintViolationException ex) {
         String message = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
         return validateResultFormat(message, ex);
@@ -61,6 +65,7 @@ public class GlobalExceptionHandler {
      * 处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常
      */
     @ExceptionHandler(value = BindException.class)
+    @ResponseBody
     public Result<?> handler(BindException ex) {
         String message = ex.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
         return validateResultFormat(message, ex);
@@ -71,6 +76,7 @@ public class GlobalExceptionHandler {
      * 处理请求参数格式错误 @RequestBody上validate失败后抛出的异常
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseBody
     public Result<?> handler(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
         return validateResultFormat(message, ex);
@@ -80,6 +86,7 @@ public class GlobalExceptionHandler {
      * Http消息不可读异常返回特定的信息
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseBody
     public Result<?> httpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return Result.build(ResultEnum.ERROR, String.format("参数格式无效:%s", ex));
     }
