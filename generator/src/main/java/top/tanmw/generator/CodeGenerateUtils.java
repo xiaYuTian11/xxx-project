@@ -31,6 +31,7 @@ public class CodeGenerateUtils {
     private String password;
     private String basePath;
     private String projectName;
+    private String packageName;
     // 优先
     private Set<String> includeSet;
     private Set<String> excludeSet;
@@ -84,12 +85,13 @@ public class CodeGenerateUtils {
         password = generatorModel.getPassword();
         basePath = generatorModel.getBasePath();
         projectName = generatorModel.getProjectName();
+        packageName = generatorModel.getPackageName();
         includeSet = generatorModel.getIncludeSet();
         excludeSet = generatorModel.getExcludeSet();
         excludePrefix = generatorModel.getExcludePrefix();
         isReplace = generatorModel.isReplace();
         fileType = generatorModel.getFileType();
-        basePackageName = PROJECT_PREFIX + projectName;
+        basePackageName = PROJECT_PREFIX + packageName;
         basePackagePath = basePackageName.replaceAll("\\.", "/");
         projectPattern = ProjectPattern.getPattern(generatorModel.getPattern());
         if (Objects.equals(SINGLE, projectPattern)) {

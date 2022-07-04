@@ -1,9 +1,8 @@
-package com.zenith.controller.base;
+package com.zenith.xxx.controller.base;
 
 import cn.hutool.core.util.StrUtil;
 import com.sjr.common.entity.Result;
 import com.sjr.common.entity.ResultEnum;
-import com.sjr.common.log.OptTypeEnum;
 import com.sjr.common.permission.Permission;
 import com.zenith.xxx.api.base.FileService;
 import com.zenith.xxx.config.LogAop;

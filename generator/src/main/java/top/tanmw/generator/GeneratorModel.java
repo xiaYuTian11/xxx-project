@@ -51,6 +51,10 @@ public class GeneratorModel {
      */
     private String projectName;
     /**
+     *
+     */
+    private String packageName;
+    /**
      * 是否覆盖
      */
     private boolean replace;
@@ -62,6 +66,14 @@ public class GeneratorModel {
     private Set<String> includeSet;
     private Set<String> excludeSet;
     private Set<String> excludePrefix;
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
     public List<Integer> getFileType() {
         return fileType;

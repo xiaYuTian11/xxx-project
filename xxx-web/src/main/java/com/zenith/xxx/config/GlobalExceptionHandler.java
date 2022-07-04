@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<?> handler(ConstraintViolationException ex) {
         String message = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
-        return validateResultFormat(message, ex);
+        return validateResultFormat(message);
     }
 
     /**
@@ -68,7 +68,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<?> handler(BindException ex) {
         String message = ex.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-        return validateResultFormat(message, ex);
+        return validateResultFormat(message);
     }
 
     /**
@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<?> handler(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-        return validateResultFormat(message, ex);
+        return validateResultFormat(message);
     }
 
     /**
@@ -91,8 +91,8 @@ public class GlobalExceptionHandler {
         return Result.build(ResultEnum.ERROR, String.format("参数格式无效:%s", ex));
     }
 
-    private <T extends Throwable> Result<?> validateResultFormat(String message, T ex) {
-        return Result.build(HttpStatus.BAD_REQUEST.value(), message, ex);
+    private <T extends Throwable> Result<?> validateResultFormat(String message) {
+        return Result.build(HttpStatus.BAD_REQUEST.value(), message);
     }
 
 }

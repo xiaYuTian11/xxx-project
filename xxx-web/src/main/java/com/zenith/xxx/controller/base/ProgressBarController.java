@@ -1,4 +1,4 @@
-package com.zenith.controller.base;
+package com.zenith.xxx.controller.base;
 
 import com.sjr.common.entity.DataProgressVo;
 import com.sjr.common.entity.Result;

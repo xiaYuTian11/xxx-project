@@ -7,6 +7,8 @@ password=cqszbbsmz
 basePath=
 ## 包工程名称，zenith-web,此处写 zenith,默认 zenith
 projectName=xxx
+## 包名称
+packageName=station
 ## 模式，single工程，multi 多模块，默认多模块
 pattern=
 ## 包含表名，多个 英文逗号分隔

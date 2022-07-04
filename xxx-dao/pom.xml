@@ -19,7 +19,6 @@
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>xxx-model</artifactId>
-            <version>1.0-dev</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>

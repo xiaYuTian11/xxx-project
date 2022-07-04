@@ -15,7 +15,7 @@ import java.util.Date;
 * @date ${date}
 */
 @Data
-@ApiModel("${table_describe} 请求实体-${table_name}ListDTO")
+@ApiModel("${table_describe} 请求实体-${table_name}DTO")
 public class ${table_name}DTO {
     private static final long serialVersionUID = ${serialVersionUID};
 

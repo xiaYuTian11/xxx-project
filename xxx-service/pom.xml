@@ -19,12 +19,10 @@
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>xxx-api</artifactId>
-            <version>1.0-dev</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>xxx-dao</artifactId>
-            <version>1.0-dev</version>
         </dependency>
         <!-- 添加ehcache支持 -->
         <dependency>

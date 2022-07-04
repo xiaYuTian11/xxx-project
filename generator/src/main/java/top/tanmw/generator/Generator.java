@@ -42,6 +42,10 @@ public class Generator {
         if (StrUtil.isBlank(model.getProjectName())) {
             model.setProjectName("zenith");
         }
+        model.setPackageName(properties.getProperty("packageName"));
+        if (StrUtil.isBlank(model.getPackageName())) {
+            model.setPackageName(model.getProjectName());
+        }
         model.setPattern(properties.getProperty("pattern"));
         if (StrUtil.isBlank(model.getPattern())) {
             model.setPattern(MULTI.getDesc());
