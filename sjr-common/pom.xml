@@ -37,7 +37,7 @@
         <dependency>
             <groupId>aspose-cells</groupId>
             <artifactId>aspose-cells</artifactId>
-            <version>${aspose-cells}</version>
+            <version>${aspose-cells.version}</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/lib/aspose-cells-21.11.jar</systemPath>
         </dependency>

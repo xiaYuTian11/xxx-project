@@ -35,32 +35,32 @@
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-web</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-api</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-service</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-dao</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-model</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>sjr-common</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
