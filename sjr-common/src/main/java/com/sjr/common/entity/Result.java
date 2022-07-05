@@ -20,7 +20,7 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public Result(ResultEnum resultEnum, T data) {
+    public Result(ResultConstant resultEnum, T data) {
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
         this.data = data;
@@ -58,11 +58,11 @@ public class Result<T> implements Serializable {
         return new Result<>(code, msg, null);
     }
 
-    public static <T> Result<T> build(ResultEnum resultEnum, T data) {
+    public static <T> Result<T> build(ResultConstant resultEnum, T data) {
         return new Result<>(resultEnum, data);
     }
 
-    public static <T> Result<T> build(ResultEnum resultEnum) {
+    public static <T> Result<T> build(ResultConstant resultEnum) {
         return new Result<>(resultEnum, null);
     }
 

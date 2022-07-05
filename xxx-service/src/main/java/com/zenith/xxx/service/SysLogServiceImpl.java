@@ -51,6 +51,11 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
 
     @Override
     public void saveLog(OptTypeEnum optTypeEnum, String module, String desc, Object requestParams, Result responseParams, Exception e) {
+        this.saveLogNotJoin(optTypeEnum, module, optTypeEnum.getText() + "了" + desc, requestParams, responseParams, e);
+    }
+
+    @Override
+    public void saveLogNotJoin(OptTypeEnum optTypeEnum, String module, String desc, Object requestParams, Result responseParams, Exception e) {
         ThreadUtil.EXECUTOR_SERVICE.execute(() -> {
             UserTicket currUser = RequestHolder.getCurrUser();
             HttpServletRequest currRequest = RequestHolder.getCurrRequest();
@@ -66,13 +71,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
             sysLog.setResponse(JackSonUtil.toJson(responseParams));
             sysLog.setResultCode(String.valueOf(responseParams.getCode()));
             sysLog.setOperType(optTypeEnum.getText());
-            StringBuffer sb = new StringBuffer(currUser.getUsername());
-            if (!Objects.equals(optTypeEnum, OptTypeEnum.NULL)) {
-                sb.append(optTypeEnum.getText()).append("了").append(desc);
-            } else {
-                sb.append(desc);
-            }
-            sysLog.setOperDesc(sb.toString());
+            sysLog.setOperDesc(currUser.getUsername() + desc);
             sysLog.setModule(module);
             sysLog.setException(null);
             sysLog.setCreateTime(new Date());

@@ -1,20 +1,21 @@
-package com.sjr.common.permission;
+package com.zenith.xxx.model.constant;
+
+import com.sjr.common.permission.MenuConstants;
 
 /**
  * 菜单配置
  *
  * @author TMW
- * @since 2022/4/28 9:29
+ * @since 2022/7/5 15:33
  */
-public enum MenuEnum implements MenuConstants {
-
-    IS_NULL(null, "暂未配置模块", "暂未配置模块");
+public enum CustomMenuEnum implements MenuConstants {
+    ;
 
     private String code;
     private String name;
     private String desc;
 
-    MenuEnum(String code, String name, String desc) {
+    CustomMenuEnum(String code, String name, String desc) {
         this.code = code;
         this.name = name;
         this.desc = desc;

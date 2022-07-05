@@ -4,7 +4,7 @@ package com.sjr.common.entity;
  * @author TMW
  * @since 2022/2/24 17:13
  */
-public enum ResultEnum {
+public enum ResultEnum implements ResultConstant {
 
     FAILED(-1, "操作失败"),
     SUCCESS(200, "操作成功"),
@@ -28,18 +28,22 @@ public enum ResultEnum {
 
     private String msg;
 
+    @Override
     public int getCode() {
         return code;
     }
 
+    @Override
     public void setCode(int code) {
         this.code = code;
     }
 
+    @Override
     public String getMsg() {
         return msg;
     }
 
+    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }

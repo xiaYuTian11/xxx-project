@@ -29,8 +29,8 @@ public @interface Log {
     String desc() default "";
 
     /**
-     * 是否详情页
+     * 是否拼接日志
      */
-    boolean isInfo() default false;
+    boolean join() default true;
 
 }

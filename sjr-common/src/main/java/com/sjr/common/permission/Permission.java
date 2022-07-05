@@ -18,7 +18,7 @@ public @interface Permission {
     /**
      * 菜单集合
      */
-    MenuEnum[] value() default {};
+    String[] value() default {};
 
     /**
      * 菜单之间的权限

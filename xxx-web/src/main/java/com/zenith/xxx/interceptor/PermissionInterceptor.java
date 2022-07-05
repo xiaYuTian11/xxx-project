@@ -82,7 +82,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     }
 
     private boolean checkPermission(Permission permission, List<String> currMenus) {
-        final MenuEnum[] menuEnums = permission.value();
+        final String[] menuEnums = permission.value();
         if (menuEnums.length <= 0) {
             return true;
         }
@@ -91,9 +91,9 @@ public class PermissionInterceptor implements HandlerInterceptor {
         }
         final MenuRelation relation = permission.relation();
         if (Objects.equals(relation, MenuRelation.OR)) {
-            return Arrays.stream(menuEnums).anyMatch(menu -> currMenus.contains(menu.getCode()));
+            return Arrays.stream(menuEnums).anyMatch(currMenus::contains);
         } else {
-            return Arrays.stream(menuEnums).allMatch(menu -> currMenus.contains(menu.getCode()));
+            return Arrays.stream(menuEnums).allMatch(currMenus::contains);
         }
     }
 
