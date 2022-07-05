@@ -17,6 +17,14 @@ public class UserTicket {
      */
     private String token;
     /**
+     * 账号
+     */
+    private String account;
+    /**
+     * 用户名称
+     */
+    private String username;
+    /**
      * 票据生成时间
      */
     private long createTime;

@@ -20,4 +20,9 @@ public class GlobalConstant {
      */
     public static final String NEWLINE = "\r\n";
 
+    /**
+     * 连接
+     */
+    public static final String POINT = ".";
+
 }

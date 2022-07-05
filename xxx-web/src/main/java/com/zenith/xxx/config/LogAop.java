@@ -1,10 +1,17 @@
 package com.zenith.xxx.config;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
+import com.sjr.common.entity.Result;
+import com.sjr.common.entity.ResultEnum;
+import com.sjr.common.entity.UserTicket;
 import com.sjr.common.log.Log;
+import com.sjr.common.log.OptTypeEnum;
 import com.sjr.common.util.JackSonUtil;
+import com.sjr.common.util.RequestHolder;
 import com.sjr.common.util.WebUtil;
+import com.zenith.xxx.api.SysLogService;
 import com.zenith.xxx.constant.GlobalConstant;
+import com.zenith.xxx.model.entity.SysLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -17,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -33,6 +41,8 @@ public class LogAop {
 
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private SysLogService sysLogService;
     public static final TransmittableThreadLocal<Long> START_TIME = new TransmittableThreadLocal<>();
     private static final String REQUEST_NORMAL_FORMAT = "\n=============\nurl:%s\ncontroller:%s\nmethodName:%s\nargs:%s\ntoken:%s\nreturn:%s\ntime:%d\n请求成功\n=============";
     private static final String REQUEST_ERROR_FORMAT = "\n=============\nurl:%s\ncontroller:%s\nmethodName:%s\nargs:%s\ntoken:%s\nreturn:%s\nerror:%s\ntime:%d\n请求失败\n=============";
@@ -84,13 +94,45 @@ public class LogAop {
                 if (Objects.isNull(opLog)) {
                     return;
                 }
+                String returnValue = JackSonUtil.toJson(keys);
                 long endTime = System.currentTimeMillis();
+                SysLog sysLog = new SysLog();
                 if (Objects.nonNull(exception)) {
-                    printErrorLog(ip, requestUrl, token, className, argsStr, exception);
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    exception.printStackTrace(pw);
+                    pw.close();
+                    LOGGER.error(String.format(REQUEST_ERROR_FORMAT, ip, requestUrl, className, argsStr, token, "无", sw, 0L), exception);
+                    sysLog.setResultCode(String.valueOf(ResultEnum.ERROR.getCode()));
+                    sysLog.setException(sw.toString());
                 } else {
-                    String returnValue = JackSonUtil.toJson(keys);
+                    Result result = (Result) keys;
+                    sysLog.setResultCode(String.valueOf(result.getCode()));
                     LOGGER.info(String.format(REQUEST_NORMAL_FORMAT, ip, requestUrl, className, argsStr, token, returnValue, (endTime - START_TIME.get())));
                 }
+
+                UserTicket currUser = RequestHolder.getCurrUser();
+                if (Objects.isNull(currUser)) {
+                    currUser = new UserTicket();
+                }
+                sysLog.setAccount(currUser.getAccount());
+                sysLog.setIp(ip);
+                sysLog.setUrl(requestUrl);
+                sysLog.setMethod(className + GlobalConstant.POINT + methodName);
+                sysLog.setParams(argsStr);
+                sysLog.setResponse(returnValue);
+                sysLog.setOperType(opLog.optType().getText());
+                StringBuffer sb = new StringBuffer();
+                sb.append(currUser.getUsername());
+                if (!Objects.equals(opLog.optType(), OptTypeEnum.NULL)) {
+                    sb.append(opLog.optType().getText()).append("了").append(opLog.desc());
+                } else {
+                    sb.append(opLog.desc());
+                }
+                sysLog.setOperDesc(sb.toString());
+                sysLog.setModule(opLog.module());
+                sysLog.setCreateTime(new Date());
+                sysLogService.save(sysLog);
             } catch (Exception e) {
                 LOGGER.error("日志记录异常：", e);
             }
