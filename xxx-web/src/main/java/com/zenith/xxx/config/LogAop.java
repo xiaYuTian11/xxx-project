@@ -10,7 +10,7 @@ import com.sjr.common.util.JackSonUtil;
 import com.sjr.common.util.RequestHolder;
 import com.sjr.common.util.WebUtil;
 import com.zenith.xxx.api.SysLogService;
-import com.zenith.xxx.constant.GlobalConstant;
+import com.zenith.xxx.model.constant.GlobalConstant;
 import com.zenith.xxx.model.entity.SysLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

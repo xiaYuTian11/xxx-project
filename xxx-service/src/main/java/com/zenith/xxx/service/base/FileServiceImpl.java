@@ -1,15 +1,12 @@
 package com.zenith.xxx.service.base;
 
-import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.sjr.common.entity.FileVO;
 import com.sjr.common.entity.Result;
-import com.sjr.common.util.IdUtil;
 import com.zenith.xxx.api.base.FileService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +16,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
-import static com.zenith.xxx.constant.FileConstant.*;
+import static com.zenith.xxx.model.constant.FileConstant.*;
 
 /**
  * 文件操作 服务类

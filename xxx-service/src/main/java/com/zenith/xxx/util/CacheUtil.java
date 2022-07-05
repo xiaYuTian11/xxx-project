@@ -2,7 +2,7 @@ package com.zenith.xxx.util;
 
 import cn.hutool.system.UserInfo;
 import com.sjr.common.entity.UserTicket;
-import com.zenith.xxx.constant.CacheConstant;
+import com.zenith.xxx.model.constant.CacheConstant;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;

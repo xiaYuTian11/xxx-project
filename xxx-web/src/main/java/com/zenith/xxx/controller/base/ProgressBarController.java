@@ -2,7 +2,7 @@ package com.zenith.xxx.controller.base;
 
 import com.sjr.common.entity.DataProgressVo;
 import com.sjr.common.entity.Result;
-import com.zenith.xxx.constant.CacheConstant;
+import com.zenith.xxx.model.constant.CacheConstant;
 import com.zenith.xxx.util.CacheUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;

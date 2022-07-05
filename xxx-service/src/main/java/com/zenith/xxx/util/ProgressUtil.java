@@ -3,7 +3,7 @@ package com.zenith.xxx.util;
 
 import com.sjr.common.constant.ProgressStatus;
 import com.sjr.common.entity.DataProgressVo;
-import com.zenith.xxx.constant.CacheConstant;
+import com.zenith.xxx.model.constant.CacheConstant;
 
 import java.text.NumberFormat;
 

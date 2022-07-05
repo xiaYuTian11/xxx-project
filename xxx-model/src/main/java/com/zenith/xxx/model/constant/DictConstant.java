@@ -1,4 +1,4 @@
-package com.zenith.xxx.constant;
+package com.zenith.xxx.model.constant;
 
 /**
  * 字典表常量

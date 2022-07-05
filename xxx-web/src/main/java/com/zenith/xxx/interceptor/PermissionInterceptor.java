@@ -10,7 +10,7 @@ import com.sjr.common.permission.MenuEnum;
 import com.sjr.common.permission.Permission;
 import com.sjr.common.util.JackSonUtil;
 import com.sjr.common.util.RequestHolder;
-import com.zenith.xxx.constant.GlobalConstant;
+import com.zenith.xxx.model.constant.GlobalConstant;
 import com.zenith.xxx.util.CacheUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
