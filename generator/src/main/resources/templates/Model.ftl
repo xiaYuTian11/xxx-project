@@ -35,7 +35,8 @@ public class ${table_name} implements Serializable {
     @TableField("${model.columnName}")
     </#if>
     <#if (model.columnType = 'varchar' || model.columnType = 'text' || model.columnType = 'varchar2'
-    || model.columnType = 'clob' || model.columnType = 'char' || model.columnType = 'longvarchar')>
+    || model.columnType = 'clob' || model.columnType = 'char' || model.columnType = 'bpchar'
+    || model.columnType = 'longvarchar')>
     private String ${model.changeColumnName?uncap_first};
     </#if>
     <#if model.columnType = 'timestamp' ||  model.columnType = 'date' >
