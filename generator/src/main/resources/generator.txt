@@ -4,9 +4,9 @@ user=root
 password=123456
 
 ## 是否删除以生成文件（用于配置错误生成的错误文件删除操作）,默认false
-isDelete=true
+isDelete=
 ## 删除层级，默认生成文件，如top.tanmw.demo.SysUserController 默认只删除 SysUserController.java，如果值为2，则删除demo包下所有文件
-deleteLevel=4
+deleteLevel=
 ## 注意文件路径采用反斜杠,默认当前工程路径
 basePath=
 ## 包工程名称，xxx-web,此处写 xxx,默认取当前工程目录名,D:\java\ideaWorkingSpace\my\generator->generator
