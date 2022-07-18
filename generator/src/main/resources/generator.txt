@@ -1,18 +1,18 @@
-url=jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+url=jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
 driver=com.mysql.cj.jdbc.Driver
 user=root
 password=123456
 
 ## 是否删除以生成文件（用于配置错误生成的错误文件删除操作）,默认false
-isDelete=
+isDelete=true
 ## 删除层级，默认生成文件，如top.tanmw.demo.SysUserController 默认只删除 SysUserController.java，如果值为2，则删除demo包下所有文件
-deleteLevel=5
+deleteLevel=4
 ## 注意文件路径采用反斜杠,默认当前工程路径
 basePath=
 ## 包工程名称，xxx-web,此处写 xxx,默认取当前工程目录名,D:\java\ideaWorkingSpace\my\generator->generator
 moduleName=xxx
 ## 包名称
-packageName=com.zenith.xxx
+packageName=com.zeniths.xxx
 ## 模式，single工程，multi 多模块，默认多模块
 pattern=
 ## 包含表名，多个 英文逗号分隔
