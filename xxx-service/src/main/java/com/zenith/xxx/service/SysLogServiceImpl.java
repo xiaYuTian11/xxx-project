@@ -2,8 +2,8 @@ package com.zenith.xxx.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sjr.common.entity.Result;
-import com.sjr.common.entity.ResultEnum;
+import com.sjr.common.result.Result;
+import com.sjr.common.result.ResultEnum;
 import com.sjr.common.entity.UserTicket;
 import com.sjr.common.log.OptTypeEnum;
 import com.sjr.common.util.JackSonUtil;

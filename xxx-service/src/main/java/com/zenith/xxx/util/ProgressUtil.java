@@ -2,7 +2,7 @@ package com.zenith.xxx.util;
 
 
 import com.sjr.common.constant.ProgressStatus;
-import com.sjr.common.entity.DataProgressVo;
+import com.sjr.common.vo.DataProgressVO;
 import com.zenith.xxx.model.constant.CacheConstant;
 
 import java.text.NumberFormat;
@@ -32,7 +32,7 @@ public class ProgressUtil {
      */
     public static void running(String currDataName, double ratio, String key) {
         String result = getNumFormat().format(ratio);
-        DataProgressVo progressVo = new DataProgressVo();
+        DataProgressVO progressVo = new DataProgressVO();
         progressVo.setCurrDataName(currDataName);
         progressVo.setRatio(result);
 
@@ -48,7 +48,7 @@ public class ProgressUtil {
 
     public static void success(String currDataName, String key, Object object) {
         String result = getNumFormat().format(100);
-        DataProgressVo progressVo = new DataProgressVo();
+        DataProgressVO progressVo = new DataProgressVO();
         progressVo.setCurrDataName(currDataName);
         progressVo.setRatio(result);
         if (object != null) {
@@ -60,7 +60,7 @@ public class ProgressUtil {
 
     public static void fail(String currDataName, String key, Object object) {
         String result = getNumFormat().format(100);
-        DataProgressVo progressVo = new DataProgressVo();
+        DataProgressVO progressVo = new DataProgressVO();
         progressVo.setCurrDataName(currDataName);
         progressVo.setRatio(result);
         if (object != null) {

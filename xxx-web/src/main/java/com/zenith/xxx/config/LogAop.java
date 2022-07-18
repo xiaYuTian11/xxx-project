@@ -1,8 +1,8 @@
 package com.zenith.xxx.config;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.sjr.common.entity.Result;
-import com.sjr.common.entity.ResultEnum;
+import com.sjr.common.result.Result;
+import com.sjr.common.result.ResultEnum;
 import com.sjr.common.entity.UserTicket;
 import com.sjr.common.log.Log;
 import com.sjr.common.log.OptTypeEnum;

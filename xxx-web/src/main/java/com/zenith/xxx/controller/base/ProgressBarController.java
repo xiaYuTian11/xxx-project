@@ -1,7 +1,7 @@
 package com.zenith.xxx.controller.base;
 
-import com.sjr.common.entity.DataProgressVo;
-import com.sjr.common.entity.Result;
+import com.sjr.common.vo.DataProgressVO;
+import com.sjr.common.result.Result;
 import com.zenith.xxx.model.constant.CacheConstant;
 import com.zenith.xxx.util.CacheUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class ProgressBarController {
 
     @GetMapping("/get")
     public Result getProgressBar(@NotNull(message = "key 不能为空") @RequestParam("key") String key) {
-        DataProgressVo progressVo = new DataProgressVo();
+        DataProgressVO progressVo = new DataProgressVO();
         try {
             // 文件上传进度
             progressVo = CacheUtil.get(CacheConstant.CACHE_PROGRESS_BAR, key);
@@ -36,7 +36,7 @@ public class ProgressBarController {
             log.error("获取进度条异常：", e);
         }
         if (progressVo == null) {
-            progressVo = new DataProgressVo();
+            progressVo = new DataProgressVO();
             progressVo.setCurrDataName("初始化");
             progressVo.setRatio("0");
         }

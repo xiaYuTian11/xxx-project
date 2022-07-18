@@ -1,6 +1,6 @@
 package com.zenith.xxx.api.base;
 
-import com.sjr.common.entity.Result;
+import com.sjr.common.result.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

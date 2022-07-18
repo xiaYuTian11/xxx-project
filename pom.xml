@@ -17,7 +17,6 @@
         <module>xxx-web</module>
         <module>xxx-service</module>
         <module>xxx-dao</module>
-        <module>sjr-common</module>
         <module>xxx-api</module>
         <module>xxx-model</module>
     </modules>
@@ -55,11 +54,6 @@
             <dependency>
                 <groupId>top.tanmw</groupId>
                 <artifactId>xxx-model</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>top.tanmw</groupId>
-                <artifactId>sjr-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
