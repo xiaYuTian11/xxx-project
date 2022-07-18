@@ -24,13 +24,6 @@
             <systemPath>${project.basedir}/../lib/commons-1.0.1.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>top.tanmw</groupId>
-            <artifactId>generator</artifactId>
-            <version>1.0.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../lib/generator-1.0.1.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
