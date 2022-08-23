@@ -10,7 +10,6 @@ import com.sjr.common.result.ResultConstant;
  */
 public enum CustomResultEnum implements ResultConstant {
     ;
-
     CustomResultEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;

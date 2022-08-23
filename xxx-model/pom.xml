@@ -16,12 +16,16 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>top.tanmw</groupId>-->
+<!--            <artifactId>commons</artifactId>-->
+<!--            <version>1.0.1</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/../lib/commons-1.0.1.jar</systemPath>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>top.tanmw</groupId>
-            <artifactId>commons</artifactId>
-            <version>1.0.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../lib/commons-1.0.1.jar</systemPath>
+            <groupId>com.efficient</groupId>
+            <artifactId>efficient-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
