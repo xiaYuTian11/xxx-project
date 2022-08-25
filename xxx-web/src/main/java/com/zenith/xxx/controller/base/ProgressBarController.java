@@ -4,6 +4,10 @@ import com.sjr.common.vo.DataProgressVO;
 import com.sjr.common.result.Result;
 import com.zenith.xxx.model.constant.CacheConstant;
 import com.zenith.xxx.util.CacheUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +25,14 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/progressBar")
 @Slf4j
 @Validated
+@Api(tags = "进度条")
 public class ProgressBarController {
 
     @GetMapping("/get")
+    @ApiOperation(value = "获取当前进度", response = Result.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "key", value = "进度条标识", required = true)
+    })
     public Result getProgressBar(@NotNull(message = "key 不能为空") @RequestParam("key") String key) {
         DataProgressVO progressVo = new DataProgressVO();
         try {

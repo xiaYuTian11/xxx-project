@@ -75,3 +75,10 @@ custom:
     path: @log-path@
   swagger:
     enable: @swagger-enable@
+com:
+  efficient:
+    swagger:
+      enable: true
+      version: 1.0.1
+      description: "测试工程描述"
+      title: "测试工程"
