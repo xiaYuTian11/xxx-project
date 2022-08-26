@@ -12,11 +12,11 @@ basePath=
 ## 包工程名称，xxx-web,此处写 xxx,默认取当前工程目录名,D:\java\ideaWorkingSpace\my\generator->generator
 moduleName=xxx
 ## 包名称
-packageName=com.zeniths.xxx
+packageName=com.zenith.xxx
 ## 模式，single工程，multi 多模块，默认多模块
 pattern=
 ## 包含表名，多个 英文逗号分隔
-includeSet=sys_user
+includeSet=sys_file_info
 ## 不包含表名，多个 英文逗号分隔
 excludeSet=
 ## 去掉指定前缀，如sys,sys_等,多个逗号分割
@@ -25,4 +25,4 @@ excludePrefix=
 replace=true
 ## 生成文件,1-model,2-dto,3-listDto,4-VO,5-converter,6-mapper,7-dao,8-service,9-serviceimpl,10-controller
 ## 1-4,生成表示包含中间连续的类型，英文逗号包括分隔
-fileType=
+fileType=1,6,7

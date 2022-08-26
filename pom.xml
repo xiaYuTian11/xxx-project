@@ -79,6 +79,10 @@
             <artifactId>efficient-boot-swagger-start</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.efficient</groupId>
+            <artifactId>efficient-boot-file-start</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
