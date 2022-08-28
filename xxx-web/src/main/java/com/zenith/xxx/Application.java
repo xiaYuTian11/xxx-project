@@ -4,8 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 启动类
@@ -15,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @SpringBootApplication
 @EnableCaching
-@ComponentScan(basePackages = {"com.efficient"})
+@ComponentScan(basePackages = {"com.efficient", "com.zenith"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

@@ -18,7 +18,7 @@ import java.util.Collections;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.zenith.xxx.dao")
+@MapperScan(basePackages = {"com.zenith.xxx.dao",""})
 public class MyBatisPlusConfig {
 
     @Bean

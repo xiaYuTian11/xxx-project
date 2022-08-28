@@ -5,6 +5,12 @@ spring:
     active: @env@
   application:
     name: xxx-project
+  servlet:
+    multipart:
+      # 上传单个文件限制
+      max-file-size: 1000MB
+      # 总文件大小，允许存储的文件夹大小
+      max-request-size: 10240MB
   jackson:
     # 不为空的属性才会序列化,具体属性可看JsonInclude.Include
     default-property-inclusion: non_null
@@ -54,6 +60,7 @@ spring:
       connection-test-query: SELECT 1
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
+#  type-aliases-package: com.efficient.**.entity
   global-config:
     db-config:
       id-type: ASSIGN_ID
@@ -63,11 +70,13 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     jdbc-type-for-null: 'null'
+
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   config: classpath:logback-spring.xml
   level:
     com.zenith.xxx.dao: debug
+    com.efficient.file.dao: debug
 
 custom:
   log:
@@ -82,4 +91,8 @@ com:
       version: 1.0.1
       description: "测试工程描述"
       title: "测试工程"
-
+    file:
+      active: db
+      tempPath: "/aaaa"
+      local:
+        localPath: "/bbbb"
