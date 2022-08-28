@@ -96,3 +96,5 @@ com:
       tempPath: "/aaaa"
       local:
         localPath: "/bbbb"
+    task:
+      enable: true

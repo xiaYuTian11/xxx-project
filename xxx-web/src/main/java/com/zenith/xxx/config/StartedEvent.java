@@ -2,8 +2,7 @@ package com.zenith.xxx.config;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.efficient.file.api.FileService;
-import com.efficient.file.dao.SysFileInfoMapper;
+import com.efficient.task.properties.TaskProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,25 +16,12 @@ import java.util.List;
  */
 @Component
 public class StartedEvent implements ApplicationRunner {
-    // @Autowired
-    // private FileProperties fileProperties;
-    // @Autowired
-    // private FileService fileService;
-    // @Autowired
-    // private SysFileInfoMapper sysFileInfoMapper;
+
     @Autowired
-    private FileService fileService;
-    @Autowired
-    private SysFileInfoMapper sysFileInfoMapper;
+    private TaskProperties taskProperties;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // System.out.println(fileProperties);
-        // System.out.println(fileService);
-        // System.out.println(sysFileInfoMapper);
-        // final List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectList(new QueryWrapper<>());
-        // System.out.println(sysFileInfos);
-        // System.out.println(fileService.list());
-        System.out.println(sysFileInfoMapper.selectList(new QueryWrapper<>()));
-        System.out.println(fileService.list());
+        System.out.println(taskProperties);
     }
 }
