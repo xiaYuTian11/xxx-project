@@ -24,7 +24,7 @@
 <!--            <systemPath>${project.basedir}/../lib/commons-1.0.1.jar</systemPath>-->
 <!--        </dependency>-->
         <dependency>
-            <groupId>com.efficient</groupId>
+            <groupId>top.tanmw</groupId>
             <artifactId>efficient-common</artifactId>
         </dependency>
         <dependency>
