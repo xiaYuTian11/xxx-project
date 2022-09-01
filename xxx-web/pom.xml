@@ -57,35 +57,103 @@
         </resources>
         <plugins>
             <!-- spring boot repackage -->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <layout>ZIP</layout>-->
+<!--                    <includes>-->
+<!--                        <include>-->
+<!--                            <groupId>top.tanmw</groupId>-->
+<!--                            <artifactId>xxx-service</artifactId>-->
+<!--                        </include>-->
+<!--                        <include>-->
+<!--                            <groupId>top.tanmw</groupId>-->
+<!--                            <artifactId>xxx-model</artifactId>-->
+<!--                        </include>-->
+<!--                        <include>-->
+<!--                            <groupId>top.tanmw</groupId>-->
+<!--                            <artifactId>xxx-dao</artifactId>-->
+<!--                        </include>-->
+<!--                        <include>-->
+<!--                            <groupId>top.tanmw</groupId>-->
+<!--                            <artifactId>xxx-api</artifactId>-->
+<!--                        </include>-->
+<!--                    </includes>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <layout>ZIP</layout>
-                    <includes>
-                        <include>
-                            <groupId>top.tanmw</groupId>
-                            <artifactId>xxx-service</artifactId>
-                        </include>
-                        <include>
-                            <groupId>top.tanmw</groupId>
-                            <artifactId>xxx-model</artifactId>
-                        </include>
-                        <include>
-                            <groupId>top.tanmw</groupId>
-                            <artifactId>xxx-dao</artifactId>
-                        </include>
-                        <include>
-                            <groupId>top.tanmw</groupId>
-                            <artifactId>xxx-api</artifactId>
-                        </include>
-                    </includes>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.source}</target>
+                    <compilerArguments>
+                        <verbose>
+<!--                            <bootclasspath></bootclasspath>-->
+<!--                            <extdirs>${project.basedir}/lib/</extdirs>-->
+                        </verbose>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <configuration>
+                    <!--                    <shadedArtifactAttached>false</shadedArtifactAttached>-->
+                    <!--                    <shadedClassifierName>${version}</shadedClassifierName>-->
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <!--                    <minimizeJar>true</minimizeJar>-->
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.sf</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.dsa</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                                <exclude>META-INF/*.rsa</exclude>
+                                <exclude>META-INF/*.EC</exclude>
+                                <exclude>META-INF/*.ec</exclude>
+                                <exclude>META-INF/MSFTSIG.SF</exclude>
+                                <exclude>META-INF/MSFTSIG.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                    <artifactSet>
+                        <includes>
+                            <include>top.tanmw:xxx-service</include>
+                            <include>top.tanmw:xxx-model</include>
+                            <include>top.tanmw:xxx-dao</include>
+                            <include>top.tanmw:xxx-api</include>
+                        </includes>
+                    </artifactSet>
                 </configuration>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
