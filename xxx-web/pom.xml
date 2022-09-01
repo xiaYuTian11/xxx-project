@@ -56,9 +56,43 @@
             </resource>
         </resources>
         <plugins>
+            <!-- spring boot repackage -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>top.tanmw</groupId>
+                            <artifactId>xxx-service</artifactId>
+                        </include>
+                        <include>
+                            <groupId>top.tanmw</groupId>
+                            <artifactId>xxx-model</artifactId>
+                        </include>
+                        <include>
+                            <groupId>top.tanmw</groupId>
+                            <artifactId>xxx-dao</artifactId>
+                        </include>
+                        <include>
+                            <groupId>top.tanmw</groupId>
+                            <artifactId>xxx-api</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
                 <configuration>
                     <!-- 将静态资源排除出 jar 包 -->
                     <excludes>
@@ -66,6 +100,7 @@
                         <exclude>static/**</exclude>
                         <exclude>public/**</exclude>
                         <exclude>templates/**</exclude>
+                        <exclude>fonts/**</exclude>
                         <!-- 自定义自己的配置文件 -->
                         <exclude>*.yml</exclude>
                     </excludes>
@@ -81,7 +116,7 @@
                         </manifest>
                         <manifestEntries>
                             <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
-                            <Class-Path>config/ lib/aspose-cells-21.11.jar lib/aspose-word-21.6.jar</Class-Path>
+                            <Class-Path>config/ lib/aspose-cells-21.11.jar lib/aspose-word-21.6.jar lib/rmb-0.1.1.jar</Class-Path>
                         </manifestEntries>
                     </archive>
                     <!-- 指定打出的 jar 包路径 -->
@@ -92,7 +127,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <!-- 自定义 -->
@@ -108,6 +142,7 @@
                             <!--这里指定包含 system scope -->
                             <!--                            <includeScope>system</includeScope>-->
                             <!--                            <includeScope>compile</includeScope>-->
+                            <excludeArtifactIds>xxx-service,xxx-model,xxx-dao,xxx-api</excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>
@@ -115,6 +150,7 @@
 
             <!-- 这个插件是用来复制项目的静态资源 -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -154,6 +190,7 @@
                                         <include>public/**</include>
                                         <include>static/**</include>
                                         <include>templates/**</include>
+                                        <include>fonts/**</include>
                                         <include>xsd/**</include>
                                     </includes>
                                 </resource>
