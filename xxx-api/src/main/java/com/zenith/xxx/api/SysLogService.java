@@ -2,8 +2,8 @@ package com.zenith.xxx.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sjr.common.result.Result;
-import com.sjr.common.log.OptTypeEnum;
+import com.efficient.common.result.Result;
+import com.efficient.common.log.OptTypeEnum;
 import com.zenith.xxx.model.dto.SysLogDTO;
 import com.zenith.xxx.model.dto.SysLogListDTO;
 import com.zenith.xxx.model.entity.SysLog;

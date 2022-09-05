@@ -1,10 +1,14 @@
 package com.zenith.xxx.util;
 
 
-import com.sjr.common.constant.ProgressStatus;
-import com.sjr.common.vo.DataProgressVO;
+import com.efficient.cache.api.CacheUtil;
+import com.efficient.common.constant.ProgressStatus;
+import com.efficient.common.vo.DataProgressVO;
 import com.zenith.xxx.model.constant.CacheConstant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.text.NumberFormat;
 
 /**
@@ -13,7 +17,19 @@ import java.text.NumberFormat;
  * @author TMW
  * @since 2022/6/13 15:22
  */
+@Component
 public class ProgressUtil {
+    @Autowired
+    private CacheUtil cacheUtil;
+
+    private static ProgressUtil progressUtil;
+
+    @PostConstruct
+    public void init() {
+        progressUtil = this;
+        progressUtil.cacheUtil = this.cacheUtil;
+    }
+
     /**
      * 获取当前
      *
@@ -37,7 +53,7 @@ public class ProgressUtil {
         progressVo.setRatio(result);
 
         progressVo.setCode(ProgressStatus.RUNNING.getCode());
-        CacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
+        progressUtil.cacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
     }
 
     public static NumberFormat getNumFormat() {
@@ -55,7 +71,7 @@ public class ProgressUtil {
             progressVo.setData(object);
         }
         progressVo.setCode(ProgressStatus.SUCCESS.getCode());
-        CacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
+        progressUtil.cacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
     }
 
     public static void fail(String currDataName, String key, Object object) {
@@ -67,6 +83,6 @@ public class ProgressUtil {
             progressVo.setData(object);
         }
         progressVo.setCode(ProgressStatus.FAIL.getCode());
-        CacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
+        progressUtil.cacheUtil.put(CacheConstant.CACHE_PROGRESS_BAR, key, progressVo);
     }
 }

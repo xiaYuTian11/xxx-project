@@ -23,37 +23,7 @@
        clearOnFlush：内存数量最大时是否清除。
     -->
     <cache
-            name="smz-token"
-            maxElementsInMemory="10000"
-            eternal="false"
-            overflowToDisk="false"
-            maxElementsOnDisk="10000000"
-            timeToIdleSeconds="1800"
-            timeToLiveSeconds="86400"
-            diskPersistent="false"
-            memoryStoreEvictionPolicy="FIFO"/>
-    <cache
-            name="smz-login-check"
-            maxElementsInMemory="10000"
-            eternal="false"
-            overflowToDisk="false"
-            maxElementsOnDisk="10000000"
-            timeToIdleSeconds="1800"
-            timeToLiveSeconds="86400"
-            diskPersistent="false"
-            memoryStoreEvictionPolicy="FIFO"/>
-    <cache
-            name="smz-dict"
-            maxElementsInMemory="10000"
-            eternal="false"
-            overflowToDisk="false"
-            maxElementsOnDisk="10000000"
-            timeToIdleSeconds="86400"
-            timeToLiveSeconds="86400"
-            diskPersistent="false"
-            memoryStoreEvictionPolicy="FIFO"/>
-    <cache
-            name="smz-progress-bar"
+            name="system"
             maxElementsInMemory="10000"
             eternal="false"
             overflowToDisk="false"

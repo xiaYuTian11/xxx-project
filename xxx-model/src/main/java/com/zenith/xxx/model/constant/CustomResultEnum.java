@@ -1,6 +1,6 @@
 package com.zenith.xxx.model.constant;
 
-import com.sjr.common.result.ResultConstant;
+import com.efficient.common.result.ResultConstant;
 
 /**
  * 自定义返回枚举

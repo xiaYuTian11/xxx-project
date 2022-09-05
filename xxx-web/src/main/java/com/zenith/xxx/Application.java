@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @since 2022/1/26 16:36
  */
 @SpringBootApplication
-@EnableCaching
+// @EnableCaching
 @ComponentScan(basePackages = {"com.efficient", "com.zenith"})
 public class Application {
     public static void main(String[] args) {

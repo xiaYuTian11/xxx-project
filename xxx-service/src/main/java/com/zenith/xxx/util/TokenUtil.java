@@ -2,7 +2,7 @@ package com.zenith.xxx.util;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.sjr.common.entity.UserTicket;
+import com.efficient.common.entity.UserTicket;
 import com.zenith.xxx.model.constant.CacheConstant;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021/3/4 22:04
  */
 @Slf4j
+
 public class TokenUtil {
     private static final String SEPARATOR = "@";
 
@@ -27,9 +28,9 @@ public class TokenUtil {
     /***
      * 校验token 是否合法
      * */
-    public static boolean verify(String userId, String token) {
+    public static boolean verify(String userId, String token, UserTicket ticket) {
         try {
-            UserTicket ticket = CacheUtil.getUserCache(token);
+            // UserTicket ticket = CacheUtil.getUserCache(token);
             if (ticket == null) {
                 return false;
             }

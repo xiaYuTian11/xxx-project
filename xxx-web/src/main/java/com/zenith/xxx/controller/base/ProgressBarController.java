@@ -1,14 +1,15 @@
 package com.zenith.xxx.controller.base;
 
-import com.sjr.common.vo.DataProgressVO;
-import com.sjr.common.result.Result;
+import com.efficient.cache.api.CacheUtil;
+import com.efficient.common.vo.DataProgressVO;
+import com.efficient.common.result.Result;
 import com.zenith.xxx.model.constant.CacheConstant;
-import com.zenith.xxx.util.CacheUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,8 @@ import javax.validation.constraints.NotNull;
 @Validated
 @Api(tags = "进度条")
 public class ProgressBarController {
+    @Autowired
+    private CacheUtil cacheUtil;
 
     @GetMapping("/get")
     @ApiOperation(value = "获取当前进度", response = Result.class)
@@ -37,7 +40,7 @@ public class ProgressBarController {
         DataProgressVO progressVo = new DataProgressVO();
         try {
             // 文件上传进度
-            progressVo = CacheUtil.get(CacheConstant.CACHE_PROGRESS_BAR, key);
+            progressVo = cacheUtil.get(CacheConstant.CACHE_PROGRESS_BAR, key);
             if (progressVo != null && progressVo.getCode() == null) {
                 progressVo.setCode("1");
             }

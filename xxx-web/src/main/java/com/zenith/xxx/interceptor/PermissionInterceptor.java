@@ -2,16 +2,17 @@ package com.zenith.xxx.interceptor;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.sjr.common.constant.MenuRelation;
-import com.sjr.common.entity.UserTicket;
-import com.sjr.common.permission.Permission;
-import com.sjr.common.result.Result;
-import com.sjr.common.result.ResultEnum;
-import com.sjr.common.util.JackSonUtil;
-import com.sjr.common.util.RequestHolder;
+import com.efficient.cache.api.CacheUtil;
+import com.efficient.common.constant.MenuRelation;
+import com.efficient.common.entity.UserTicket;
+import com.efficient.common.permission.Permission;
+import com.efficient.common.result.Result;
+import com.efficient.common.result.ResultEnum;
+import com.efficient.common.util.JackSonUtil;
+import com.efficient.common.util.RequestHolder;
 import com.zenith.xxx.model.constant.GlobalConstant;
-import com.zenith.xxx.util.CacheUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -33,6 +34,8 @@ import java.util.Objects;
 @Component
 @Slf4j
 public class PermissionInterceptor implements HandlerInterceptor {
+    @Autowired
+    private CacheUtil cacheUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -65,13 +68,13 @@ public class PermissionInterceptor implements HandlerInterceptor {
             return false;
         }
         // 根据token查询
-        UserTicket userTicket = CacheUtil.getUserCache(token);
+        UserTicket userTicket = cacheUtil.get("user-cache", token);
         if (userTicket == null) {
             this.returnJson(response, ResultEnum.NOT_LOGIN);
             return false;
         }
         // 刷新用户信息保留时间
-        CacheUtil.refreshUserCache(token);
+        cacheUtil.refresh("user-cache", token, 60 * 15);
         // 权限校验
         final boolean checkPermission = checkPermission(permission, userTicket.getPermissions());
         if (!checkPermission) {

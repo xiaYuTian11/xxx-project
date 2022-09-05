@@ -24,10 +24,6 @@
 <!--            <systemPath>${project.basedir}/../lib/commons-1.0.1.jar</systemPath>-->
 <!--        </dependency>-->
         <dependency>
-            <groupId>top.tanmw</groupId>
-            <artifactId>efficient-common</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>

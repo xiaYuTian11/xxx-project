@@ -1,7 +1,7 @@
 package com.zenith.xxx.config;
 
-import com.sjr.common.result.Result;
-import com.sjr.common.result.ResultEnum;
+import com.efficient.common.result.Result;
+import com.efficient.common.result.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

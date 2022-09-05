@@ -1,9 +1,9 @@
 package com.zenith.xxx.controller;
 
-import com.sjr.common.result.Result;
-import com.sjr.common.log.Log;
-import com.sjr.common.log.OptTypeEnum;
-import com.sjr.common.permission.Permission;
+import com.efficient.common.result.Result;
+import com.efficient.common.log.Log;
+import com.efficient.common.log.OptTypeEnum;
+import com.efficient.common.permission.Permission;
 import com.zenith.xxx.api.SysLogService;
 import com.zenith.xxx.model.dto.SysLogDTO;
 import com.zenith.xxx.model.dto.SysLogListDTO;

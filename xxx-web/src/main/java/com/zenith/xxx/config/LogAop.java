@@ -1,14 +1,15 @@
 package com.zenith.xxx.config;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.sjr.common.result.Result;
-import com.sjr.common.result.ResultEnum;
-import com.sjr.common.entity.UserTicket;
-import com.sjr.common.log.Log;
-import com.sjr.common.log.OptTypeEnum;
-import com.sjr.common.util.JackSonUtil;
-import com.sjr.common.util.RequestHolder;
-import com.sjr.common.util.WebUtil;
+import com.efficient.common.result.Result;
+import com.efficient.common.result.ResultEnum;
+import com.efficient.common.entity.UserTicket;
+import com.efficient.common.log.Log;
+import com.efficient.common.log.OptTypeEnum;
+import com.efficient.common.util.JackSonUtil;
+import com.efficient.common.util.RequestHolder;
+import com.efficient.common.util.ThreadUtil;
+import com.efficient.common.util.WebUtil;
 import com.zenith.xxx.api.SysLogService;
 import com.zenith.xxx.model.constant.GlobalConstant;
 import com.zenith.xxx.model.entity.SysLog;
@@ -47,7 +48,7 @@ public class LogAop {
     private static final String REQUEST_NORMAL_FORMAT = "\n=============\nurl:%s\ncontroller:%s\nmethodName:%s\nargs:%s\ntoken:%s\nreturn:%s\ntime:%d\n请求成功\n=============";
     private static final String REQUEST_ERROR_FORMAT = "\n=============\nurl:%s\ncontroller:%s\nmethodName:%s\nargs:%s\ntoken:%s\nreturn:%s\nerror:%s\ntime:%d\n请求失败\n=============";
 
-    @Pointcut("@annotation(com.sjr.common.log.Log)")
+    @Pointcut("@annotation(com.efficient.common.log.Log)")
     public void pointCut() {
     }
 
@@ -77,7 +78,7 @@ public class LogAop {
         final String ip = WebUtil.getIP(request);
         final String requestUrl = request.getRequestURI();
         final String token = request.getHeader(GlobalConstant.TOKEN);
-        com.sjr.common.util.ThreadUtil.EXECUTOR_SERVICE.execute(() -> {
+        ThreadUtil.EXECUTOR_SERVICE.execute(() -> {
             try {
                 // 从切面织入点处通过反射机制获取织入点处的方法
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
