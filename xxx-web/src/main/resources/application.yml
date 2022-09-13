@@ -84,6 +84,7 @@ logging:
   level:
     com.zenith.xxx.dao: debug
     com.efficient.file.dao: debug
+    com.efficient.task.dao: debug
 
 custom:
   log:

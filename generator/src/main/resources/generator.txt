@@ -12,11 +12,11 @@ basePath=
 ## 包工程名称，xxx-web,此处写 xxx,默认取当前工程目录名,D:\java\ideaWorkingSpace\my\generator->generator
 moduleName=xxx
 ## 包名称
-packageName=com.efficient.task
+packageName=com.efficient.logs
 ## 模式，single工程，multi 多模块，默认多模块
 pattern=single
 ## 包含表名，多个 英文逗号分隔
-includeSet=sys_task
+includeSet=sys_log
 ## 不包含表名，多个 英文逗号分隔
 excludeSet=
 ## 去掉指定前缀，如sys,sys_等,多个逗号分割
