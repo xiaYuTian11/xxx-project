@@ -1,14 +1,14 @@
 package com.zenith.xxx.controller;
 
 import com.efficient.common.result.Result;
-import com.efficient.common.log.Log;
-import com.efficient.common.log.OptTypeEnum;
 import com.efficient.common.permission.Permission;
-import com.zenith.xxx.api.SysLogService;
-import com.zenith.xxx.model.dto.SysLogDTO;
+import com.efficient.logs.annotation.Log;
+import com.efficient.logs.constant.LogEnum;
+import com.efficient.logs.model.dto.SysLogDTO;
+import com.efficient.logs.model.entity.SysLog;
+import com.efficient.logs.model.vo.SysLogVO;
+import com.zenith.xxx.api.SysLogServiceApi;
 import com.zenith.xxx.model.dto.SysLogListDTO;
-import com.zenith.xxx.model.entity.SysLog;
-import com.zenith.xxx.model.vo.SysLogVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,12 +35,12 @@ import javax.validation.constraints.NotBlank;
 public class SysLogController {
 
     @Autowired
-    private SysLogService sysLogService;
+    private SysLogServiceApi sysLogService;
 
     /**
     * 新增
     */
-    @Log(optType = OptTypeEnum.INSERT)
+    @Log(logOpt = LogEnum.INSERT)
     @PostMapping("/save")
     @ApiOperation(value = "保存", response = Result.class)
     public Result save(@Validated @RequestBody SysLogDTO dto) {
@@ -51,7 +51,7 @@ public class SysLogController {
     /**
     * 详情
     */
-    @Log(optType = OptTypeEnum.QUERY)
+    @Log(logOpt = LogEnum.QUERY)
     @GetMapping("/find")
     @ApiOperation(value = "详情", response = Result.class)
     @ApiImplicitParams({
@@ -65,7 +65,7 @@ public class SysLogController {
     /**
     * 修改
     */
-    @Log(optType = OptTypeEnum.UPDATE)
+    @Log(logOpt = LogEnum.UPDATE)
     @PostMapping("/update")
     @ApiOperation(value = "修改", response = Result.class)
     public Result update(@Validated @RequestBody SysLogDTO dto) {
@@ -76,7 +76,7 @@ public class SysLogController {
     /**
     * 删除
     */
-    @Log(optType = OptTypeEnum.DELETE)
+    @Log(logOpt = LogEnum.DELETE)
     @GetMapping("/delete")
     @ApiOperation(value = "删除", response = Result.class)
     @ApiImplicitParams({
@@ -90,7 +90,7 @@ public class SysLogController {
     /**
     * 列表
     */
-    @Log(optType = OptTypeEnum.PAGE)
+    @Log(logOpt = LogEnum.QUERY)
     @PostMapping("/list")
     @ApiOperation(value = "列表", response = Result.class)
     public Result list(@Validated @RequestBody SysLogListDTO dto) {

@@ -8,6 +8,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,6 +58,17 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<?> handler(ConstraintViolationException ex) {
         String message = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
+        return validateResultFormat(message);
+    }
+
+    /**
+     * 一般参数校验绑定异常处理
+     * 处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常
+     */
+    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+    @ResponseBody
+    public Result<?> handler(HttpRequestMethodNotSupportedException ex) {
+        String message = ex.getMessage();
         return validateResultFormat(message);
     }
 

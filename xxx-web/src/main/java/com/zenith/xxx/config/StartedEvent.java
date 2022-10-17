@@ -2,9 +2,9 @@ package com.zenith.xxx.config;
 
 import cn.hutool.core.thread.ThreadUtil;
 import com.efficient.cache.api.CacheUtil;
+import com.efficient.logs.model.entity.SysLog;
 import com.efficient.task.api.SysTaskService;
 import com.efficient.task.properties.TaskProperties;
-import com.zenith.xxx.model.entity.SysLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -33,8 +33,8 @@ public class StartedEvent implements ApplicationRunner {
         String cacheName = "system";
         String key = "top";
         SysLog sysLog = new SysLog();
-        sysLog.setAccount("admin");
-        sysLog.setCreateTime(new Date());
+        sysLog.setUserId("admin");
+        sysLog.setLogTime(new Date());
         cacheUtil.put(cacheName, key, sysLog);
         SysLog data = cacheUtil.get(cacheName, key);
         System.out.println(data);

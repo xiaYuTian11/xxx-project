@@ -40,6 +40,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HandlerMethod method;
+        RequestHolder.set(request);
         try {
             method = (HandlerMethod) handler;
         } catch (ClassCastException e) {
