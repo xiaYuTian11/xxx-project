@@ -1,6 +1,7 @@
 package com.zenith.xxx.interceptor;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import com.efficient.auth.permission.Permission;
 import com.efficient.cache.api.CacheUtil;
@@ -125,4 +126,11 @@ public class PermissionInterceptor implements HandlerInterceptor {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.nanoTime());
+        ThreadUtil.sleep(1000);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.nanoTime());
+    }
 }
