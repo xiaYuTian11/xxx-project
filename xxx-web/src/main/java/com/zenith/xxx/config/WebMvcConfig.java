@@ -1,6 +1,7 @@
 package com.zenith.xxx.config;
 
-import com.zenith.xxx.interceptor.PermissionInterceptor;
+import com.efficient.auth.interceptor.PermissionInterceptor;
+import com.efficient.idempotence.interceptor.IdempotenceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,6 +21,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private PermissionInterceptor permissionInterceptor;
+    @Autowired
+    private IdempotenceInterceptor idempotenceInterceptor;
     /**
      * 默认拦截器排除资源
      */
@@ -28,7 +31,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(permissionInterceptor).addPathPatterns("/**")
+        // registry.addInterceptor(permissionInterceptor).addPathPatterns("/**")
+        //         .excludePathPatterns(excludePaths);
+        registry.addInterceptor(idempotenceInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(excludePaths);
     }
 

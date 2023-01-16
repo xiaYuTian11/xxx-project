@@ -58,12 +58,12 @@ spring:
       # 数据库连接超时时间,默认30秒，即30000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-#  redis:
-#    database: 0
-#    host: 127.0.0.1
-#    port: 6379
-#    password: 20191809
-#    timeout: 3000
+  redis:
+    database: 0
+    host: 192.168.0.76
+    port: 6379
+    password: sjr1809
+    timeout: 3000
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
@@ -107,4 +107,5 @@ com:
     task:
       enable: true
     cache:
-      active: ehcache
+#      active: ehcache
+      active: redis

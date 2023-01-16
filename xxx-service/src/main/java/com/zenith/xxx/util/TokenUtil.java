@@ -2,7 +2,7 @@ package com.zenith.xxx.util;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.efficient.common.entity.UserTicket;
+import com.efficient.common.auth.UserTicket;
 import com.zenith.xxx.model.constant.CacheConstant;
 import lombok.extern.slf4j.Slf4j;
 

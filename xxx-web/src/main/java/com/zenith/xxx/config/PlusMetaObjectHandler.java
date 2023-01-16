@@ -1,8 +1,8 @@
 package com.zenith.xxx.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.efficient.common.entity.UserTicket;
-import com.efficient.common.util.RequestHolder;
+import com.efficient.common.auth.RequestHolder;
+import com.efficient.common.auth.UserTicket;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;

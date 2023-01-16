@@ -2,18 +2,17 @@ package com.zenith.xxx.interceptor;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.efficient.auth.permission.Permission;
 import com.efficient.cache.api.CacheUtil;
+import com.efficient.common.auth.RequestHolder;
+import com.efficient.common.auth.UserTicket;
 import com.efficient.common.constant.MenuRelation;
-import com.efficient.common.entity.UserTicket;
-import com.efficient.common.permission.Permission;
 import com.efficient.common.result.Result;
 import com.efficient.common.result.ResultEnum;
 import com.efficient.common.util.JackSonUtil;
-import com.efficient.common.util.RequestHolder;
 import com.zenith.xxx.model.constant.GlobalConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -31,7 +30,7 @@ import java.util.Objects;
  * @author TMW
  * @date 2021/3/4 21:19
  */
-@Component
+// @Component
 @Slf4j
 public class PermissionInterceptor implements HandlerInterceptor {
     @Autowired
@@ -45,7 +44,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
             method = (HandlerMethod) handler;
         } catch (ClassCastException e) {
             log.error(e.getMessage(), e);
-            this.returnJson(response, ResultEnum.REQUEST_PATH_ERROR);
+            this.returnJson(response, ResultEnum.ERROR_PATH);
             return false;
         }
         String a = "1";
@@ -77,7 +76,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
         // 刷新用户信息保留时间
         cacheUtil.refresh("user-cache", token, 60 * 15);
         // 权限校验
-        final boolean checkPermission = checkPermission(permission, userTicket.getPermissions());
+        final boolean checkPermission = checkPermission(permission, userTicket.getPermissionList());
         if (!checkPermission) {
             this.returnJson(response, ResultEnum.NOT_PERMISSION);
             return false;

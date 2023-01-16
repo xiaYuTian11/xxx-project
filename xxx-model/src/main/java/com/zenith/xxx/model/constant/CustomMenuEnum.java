@@ -1,6 +1,6 @@
 package com.zenith.xxx.model.constant;
 
-import com.efficient.common.permission.MenuConstants;
+import com.efficient.auth.permission.MenuConstants;
 
 /**
  * 菜单配置

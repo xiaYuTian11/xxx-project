@@ -1,7 +1,8 @@
 package com.zenith.xxx.controller;
 
+import com.efficient.auth.permission.Permission;
 import com.efficient.common.result.Result;
-import com.efficient.common.permission.Permission;
+import com.efficient.idempotence.annotation.Idempotence;
 import com.efficient.logs.annotation.Log;
 import com.efficient.logs.constant.LogEnum;
 import com.efficient.logs.model.dto.SysLogDTO;
@@ -57,6 +58,7 @@ public class SysLogController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "数据唯一标识", required = true)
     })
+    @Idempotence
     public Result find(@NotBlank(message = "id 不能为空") @RequestParam(name="id") String id) {
         SysLogVO entity = sysLogService.findById(id);
         return Result.ok(entity);
