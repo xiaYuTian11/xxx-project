@@ -1,6 +1,7 @@
 package com.zenith.xxx.config;
 
 import com.efficient.auth.interceptor.PermissionInterceptor;
+import com.efficient.auth.interceptor.RequestHolderInterceptor;
 import com.efficient.idempotence.interceptor.IdempotenceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private PermissionInterceptor permissionInterceptor;
     @Autowired
     private IdempotenceInterceptor idempotenceInterceptor;
+    @Autowired
+    private RequestHolderInterceptor requestHolderInterceptor;
     /**
      * 默认拦截器排除资源
      */
@@ -33,6 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // registry.addInterceptor(permissionInterceptor).addPathPatterns("/**")
         //         .excludePathPatterns(excludePaths);
+        registry.addInterceptor(requestHolderInterceptor).addPathPatterns("/**");
         registry.addInterceptor(idempotenceInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(excludePaths);
     }

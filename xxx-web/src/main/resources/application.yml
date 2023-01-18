@@ -83,8 +83,7 @@ logging:
   config: classpath:logback-spring.xml
   level:
     com.zenith.xxx.dao: debug
-    com.efficient.file.dao: debug
-    com.efficient.task.dao: debug
+    com.efficient.*.dao: debug
 
 custom:
   log:
@@ -109,3 +108,10 @@ com:
     cache:
 #      active: ehcache
       active: redis
+    logs:
+      name: efficient_boot_test
+      level: info
+      path: ./logs
+    idempotence:
+      expireTime: 3
+
