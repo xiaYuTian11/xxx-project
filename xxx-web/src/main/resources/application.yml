@@ -60,9 +60,9 @@ spring:
       connection-test-query: SELECT 1
   redis:
     database: 0
-    host: 192.168.0.76
+    host: 127.0.0.1
     port: 6379
-    password: sjr1809
+    password: 20191809
     timeout: 3000
 
 mybatis-plus:
@@ -113,5 +113,8 @@ com:
       level: info
       path: ./logs
     idempotence:
-      expireTime: 3
+      expireTime: 3000
+      global: true
+    auth:
+      max-online: 10
 

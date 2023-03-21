@@ -17,7 +17,12 @@ import java.util.List;
 public class AuthServiceImpl implements AuthService {
     @Override
     public UserCheck getUserInfo(LoginInfo loginInfo) {
-        return new UserCheck();
+        UserCheck userCheck = new UserCheck();
+        userCheck.setUserId("1");
+        userCheck.setAccount("admin");
+        userCheck.setUsername("超级管理员");
+        userCheck.setPassword("e10adc3949ba59abbe56e057f20f883e");
+        return userCheck;
     }
 
     @Override

@@ -95,6 +95,7 @@ public class SysLogController {
     @Log(logOpt = LogEnum.QUERY)
     @PostMapping("/list")
     @ApiOperation(value = "列表", response = Result.class)
+    @Idempotence
     public Result list(@Validated @RequestBody SysLogListDTO dto) {
         return Result.ok(sysLogService.list(dto));
     }
