@@ -1,0 +1,7 @@
+# build
+docker build --no-cache -t leader .
+# run
+ docker run --name=leader -d -it -v /usr/local/software/jdk1.8.0_212/:/usr/local/software/jdk1.8.0_212/ -v /home/ykz_leader/server:/home/ykz_leader/server -p 5558:5558 leader
+
+
+

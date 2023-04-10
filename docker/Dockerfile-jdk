@@ -1,0 +1,3 @@
+FROM java:8
+EXPOSE 5554
+CMD ["sh","/home/tz-gb/bin/tz-gb.sh"]

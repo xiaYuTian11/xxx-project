@@ -1,0 +1,4 @@
+docker build --no-cache -t tz-gb .
+
+docker run --name=tzgb -d -it -v /home/tz-gb/:/home/tz-gb/ -p 5550:5554 -p 5551:5553 tz-gb
+
