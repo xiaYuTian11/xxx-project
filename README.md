@@ -220,4 +220,27 @@ springboot(2.6.6) + mybatis-plus(3.5.1) + ehcache(2.10.9.2)
     11.其余规范请参照《阿里巴巴 Java 开发手册》索引规约
 ```
 
+## mysql docker 安装
+```shell
+docker search mysql
+
+docker pull  mysql:latest
+
+docker run --name mysql -p 3306:3306 -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=tmw123 -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+```
+
+## minio docker 安装
+```shell
+docker search minio
+docker pull minio/minio:latest
+
+docker run  -p 9000:9000  -p 9090:9090  --name minio \
+ -d --restart=always \
+ -e MINIO_ACCESS_KEY=minio \
+ -e MINIO_SECRET_KEY=minio@123 \
+ -v /home/minio/data:/data \
+ -v /home/minio/config:/root/.minio \
+  minio/minio server /data  --console-address ":9000" --address ":9090"
+```
+
 

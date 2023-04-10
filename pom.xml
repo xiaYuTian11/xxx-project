@@ -105,13 +105,22 @@
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-logs-start</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>net.sf.ehcache</groupId>-->
-<!--            <artifactId>ehcache</artifactId>-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-context</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-context-support</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-configs-start</artifactId>
@@ -140,6 +149,11 @@
             <artifactId>hutool-all</artifactId>
             <version>5.8.15</version>
         </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.2.1</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -147,10 +161,10 @@
             <properties>
                 <env>dev</env>
                 <datasource.url>
-                    <![CDATA[jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                    <![CDATA[jdbc:mysql://192.168.119.5:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
                 <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
                 <datasource.username>root</datasource.username>
-                <datasource.password>123456</datasource.password>
+                <datasource.password>tmw123</datasource.password>
                 <log-level>info</log-level>
                 <log-path>./logs</log-path>
                 <swagger-enable>true</swagger-enable>

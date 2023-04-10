@@ -14,7 +14,7 @@ import org.springframework.context.annotation.FilterType;
  * @since 2022/1/26 16:36
  */
 @SpringBootApplication
-@EnableCaching
+// @EnableCaching
 // @ComponentScan(basePackages = {"com.efficient", "com.zenith"},
 //         excludeFilters = {
 //                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.efficient.auth.controller.LoginController")})
