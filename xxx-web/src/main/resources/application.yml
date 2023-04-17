@@ -99,7 +99,7 @@ com:
       description: "测试工程描述"
       title: "测试工程"
     file:
-      active: minio
+      active: local
       tempPath: "/aaaa"
       local:
         localPath: "/bbbb"

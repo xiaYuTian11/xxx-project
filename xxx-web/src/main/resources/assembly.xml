@@ -31,7 +31,7 @@
         <!-- 自定义 shell 脚本存放路径 -->
         <fileSet>
             <directory>${project.basedir}/../shell/</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>bin</outputDirectory>
             <includes>
                 <include>*.sh</include>
             </includes>
