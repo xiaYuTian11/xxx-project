@@ -2,6 +2,7 @@ package top.tanmw.test;
 
 import cn.hutool.core.date.StopWatch;
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.crypto.SecureUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CountDownLatch;
@@ -76,5 +77,10 @@ public class TimeTest {
         }
         downLatch2.await();
         System.out.println(System.currentTimeMillis() - start1);
+    }
+
+    @Test
+    public void test03(){
+        System.out.println(SecureUtil.md5("123456" + "tanmw"));
     }
 }

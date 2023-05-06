@@ -28,8 +28,9 @@ public class StartedEvent implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(taskProperties);
-        System.out.println(sysTaskService.findAll());
+        // System.out.println(taskProperties);
+        sysTaskService.findAll();
+        // System.out.println(sysTaskService.findAll());
         String cacheName = "system";
         String key = "top";
         SysLog sysLog = new SysLog();
@@ -37,13 +38,13 @@ public class StartedEvent implements ApplicationRunner {
         sysLog.setLogTime(new Date());
         cacheUtil.put(cacheName, key, sysLog);
         SysLog data = cacheUtil.get(cacheName, key);
-        System.out.println(data);
+        // System.out.println(data);
         cacheUtil.refresh(cacheName, key, 10);
 
         ThreadUtil.safeSleep(1000 * 11);
         // System.out.println(cacheUtil.get(cacheName, key).toString());
         cacheUtil.put(cacheName, key, sysLog);
-        System.out.println(cacheUtil.get(cacheName, key).toString());
+        // System.out.println(cacheUtil.get(cacheName, key).toString());
         cacheUtil.removeCache(cacheName, key);
         // System.out.println(cacheUtil.get(cacheName, key).toString());
         cacheUtil.removeCache(cacheName);

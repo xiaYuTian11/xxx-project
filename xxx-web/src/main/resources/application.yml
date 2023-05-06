@@ -79,11 +79,11 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-logging:
-  config: classpath:logback-spring.xml
-  level:
-    com.zenith.xxx.dao: debug
-    com.efficient.*.dao: debug
+#logging:
+#  config: classpath:logback-spring.xml
+#  level:
+#    com.zenith.xxx.dao: info
+#    com.efficient.*.dao: info
 
 custom:
   log:
