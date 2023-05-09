@@ -1,0 +1,56 @@
+#用于部署运行所依赖的服务
+version: '3.9'
+services:
+  xxxapp:
+    image: xxxapp:0.0.1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /home/logs/:/home/logs/ #数据文件挂载
+    ports:
+      - "8888:8888"
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - tmw
+
+  # Redis数据库
+  redis:
+    image: redis
+    container_name: redis
+    environment:
+      TZ: Asia/Shanghai
+    command: redis-server --appendonly yes --requirepass 123456
+    restart: always
+    volumes:
+      - /home/tanmw/redis/data:/data #数据文件挂载
+      - /home/tanmw/redis/redis.conf:/etc/redis/redis.conf #配置文件挂载
+    ports:
+      - "6379:6379"
+    networks:
+      - tmw
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    volumes:
+      - /home/tanmw/mysql/data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - "3306:3306"
+    restart: always
+    command:
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+    networks:
+      - tmw
+networks: # 定义 tmw 网络，可以指定一些参数，如驱动器，子网等，或者使用默认值
+  tmw:

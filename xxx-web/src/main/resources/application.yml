@@ -37,10 +37,10 @@ spring:
       add-mappings: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: @datasource.url@
-    username: @datasource.username@
-    password: @datasource.password@
-    driver-class-name: @datasource.driver@
+    url: jdbc:mysql://mysql:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # 连接池
     hikari:
       #连接池名
@@ -60,9 +60,9 @@ spring:
       connection-test-query: SELECT 1
   redis:
     database: 0
-    host: 127.0.0.1
+    host: redis
     port: 6379
-    password: 20191809
+    password: 123456
     timeout: 3000
 
 mybatis-plus:
@@ -85,12 +85,6 @@ mybatis-plus:
 #    com.zenith.xxx.dao: info
 #    com.efficient.*.dao: info
 
-custom:
-  log:
-    level: @log-level@
-    path: @log-path@
-  swagger:
-    enable: @swagger-enable@
 com:
   efficient:
     swagger:
@@ -106,12 +100,12 @@ com:
     task:
       enable: true
     cache:
-      active: ehcache
-#      active: redis
+#      active: ehcache
+      active: redis
     logs:
-      name: efficient_boot_test
+      name: xxx-project
       level: info
-      path: ./logs
+      path: /home/logs/xxx-project/
     idempotence:
       expireTime: 3000
       global: true

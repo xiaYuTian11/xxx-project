@@ -45,9 +45,9 @@ public class StartedEvent implements ApplicationRunner {
         // System.out.println(cacheUtil.get(cacheName, key).toString());
         cacheUtil.put(cacheName, key, sysLog);
         // System.out.println(cacheUtil.get(cacheName, key).toString());
-        cacheUtil.removeCache(cacheName, key);
+        // cacheUtil.removeCache(cacheName, key);
         // System.out.println(cacheUtil.get(cacheName, key).toString());
-        cacheUtil.removeCache(cacheName);
+        // cacheUtil.removeCache(cacheName);
         // System.out.println(cacheUtil.get(cacheName, key).toString());
         // System.out.println(1/0);
     }
