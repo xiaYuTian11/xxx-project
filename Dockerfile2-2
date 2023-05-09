@@ -1,0 +1,11 @@
+FROM openjdk:8
+#WORKDIR /home/software/xxx
+#ADD  xxx-1.0-dev-package.zip .
+
+COPY xxx-1.0-dev.jar/ /xxx/xxx-1.0-dev.jar
+COPY lib/ /xxx/lib
+COPY config/ /xxx/config
+
+EXPOSE 8080
+# ENTRYPOINT：docker启动时，运行的命令，这里容器启动时直接运行jar服务。
+ENTRYPOINT ["java","-jar","/xxx/xxx-1.0-dev.jar"]
