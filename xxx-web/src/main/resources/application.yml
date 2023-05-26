@@ -37,10 +37,10 @@ spring:
       add-mappings: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://mysql:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: @datasource.url@
+    username: @datasource.username@
+    password: @datasource.password@
+    driver-class-name: @datasource.driver@
     # 连接池
     hikari:
       #连接池名
@@ -93,15 +93,15 @@ com:
       description: "测试工程描述"
       title: "测试工程"
     file:
-      active: local
+      active: minio
       tempPath: "/aaaa"
       local:
         localPath: "/bbbb"
     task:
       enable: true
     cache:
-#      active: ehcache
-      active: redis
+      active: ehcache
+#      active: redis
     logs:
       name: xxx-project
       level: info
@@ -113,7 +113,7 @@ com:
       max-online: 10
 
 minio:
-  endpoint: http://192.168.119.5:9090
-  accessKey: uzJRjtHyYPpDr3oI
-  secretKey: 5I6zKXjo2mpZS0lhNid5JzyKDsR6k0VL
-  bucketName: test
+  endpoint: http://192.168.0.76:9000
+  accessKey: hZvj9uBFU1ytImhpXXrz
+  secretKey: iwMB6F9ysBQ8SpucXbszwMuc1vUhXpeRwpXuQqT7
+  bucketName: gzdj

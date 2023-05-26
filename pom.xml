@@ -188,10 +188,10 @@
             <properties>
                 <env>dev</env>
                 <datasource.url>
-                    <![CDATA[jdbc:mysql://172.20.101.142:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true]]></datasource.url>
-                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
-                <datasource.username>root</datasource.username>
-                <datasource.password>123456</datasource.password>
+                    <![CDATA[jdbc:postgresql://127.0.0.1:5432/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true]]></datasource.url>
+                <datasource.driver>org.postgresql.Driver</datasource.driver>
+                <datasource.username>postgres</datasource.username>
+                <datasource.password>20191809</datasource.password>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -202,10 +202,10 @@
             <properties>
                 <env>test</env>
                 <datasource.url>
-                    <![CDATA[jdbc:mysql://172.22.162.170:5432/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true]]></datasource.url>
-                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
-                <datasource.username>root</datasource.username>
-                <datasource.password>123456</datasource.password>
+                    <![CDATA[jdbc:postgresql://127.0.0.1:5432/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true]]></datasource.url>
+                <datasource.driver>org.postgresql.Driver</datasource.driver>
+                <datasource.username>postgres</datasource.username>
+                <datasource.password>20191809</datasource.password>
             </properties>
         </profile>
         <profile>
@@ -213,10 +213,10 @@
             <properties>
                 <env>prod</env>
                 <datasource.url>
-                    <![CDATA[jdbc:mysql://172.22.162.170:5432/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true]]></datasource.url>
-                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
-                <datasource.username>root</datasource.username>
-                <datasource.password>123456</datasource.password>
+                    <![CDATA[jdbc:postgresql://127.0.0.1:5432/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true]]></datasource.url>
+                <datasource.driver>org.postgresql.Driver</datasource.driver>
+                <datasource.username>postgres</datasource.username>
+                <datasource.password>20191809</datasource.password>
             </properties>
         </profile>
     </profiles>
