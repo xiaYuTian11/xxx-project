@@ -106,7 +106,7 @@ com:
       name: xxx-project
       level: info
       path: /home/logs/xxx-project/
-    idempotence:
+    rate:
       expireTime: 3000
       global: true
     auth:

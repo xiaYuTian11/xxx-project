@@ -24,5 +24,10 @@
             <groupId>top.tanmw</groupId>
             <artifactId>xxx-dao</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.11.0</version>
+        </dependency>
     </dependencies>
 </project>

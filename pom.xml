@@ -6,7 +6,7 @@
     <parent>
         <groupId>top.tanmw</groupId>
         <artifactId>efficient-boot</artifactId>
-        <version>0.5.6</version>
+        <version>0.6.0</version>
     </parent>
 <!--    <parent>-->
 <!--        <groupId>org.springframework.boot</groupId>-->
@@ -32,13 +32,24 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <swagger.version>2.9.2</swagger.version>
-        <efficient.version>0.5.6</efficient.version>
     </properties>
     <repositories>
         <repository>
-            <id>central</id>
-            <name>Maven Central</name>
-            <url>https://repo1.maven.org/maven2</url>
+            <id>maven-public</id>
+            <name>maven-public</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 
@@ -90,33 +101,27 @@
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-common</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <!-- 引入Swagger2依赖 -->
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-swagger-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-file-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-task-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-cache-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-logs-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
@@ -137,17 +142,14 @@
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-configs-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-auth-start</artifactId>
-            <version>${efficient.version}</version>
         </dependency>
         <dependency>
             <groupId>top.tanmw</groupId>
-            <artifactId>efficient-boot-idempotence-start</artifactId>
-            <version>${efficient.version}</version>
+            <artifactId>efficient-boot-rate-start</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -2,7 +2,7 @@ package com.zenith.xxx.config;
 
 import com.efficient.auth.interceptor.PermissionInterceptor;
 import com.efficient.auth.interceptor.RequestHolderInterceptor;
-import com.efficient.idempotence.interceptor.IdempotenceInterceptor;
+import com.efficient.rate.interceptor.RateInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private PermissionInterceptor permissionInterceptor;
     @Autowired
-    private IdempotenceInterceptor idempotenceInterceptor;
+    private RateInterceptor rateInterceptor;
     @Autowired
     private RequestHolderInterceptor requestHolderInterceptor;
     /**
@@ -37,7 +37,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(permissionInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(excludePaths);
         registry.addInterceptor(requestHolderInterceptor).addPathPatterns("/**");
-        registry.addInterceptor(idempotenceInterceptor).addPathPatterns("/**")
+        registry.addInterceptor(rateInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(excludePaths);
     }
 
