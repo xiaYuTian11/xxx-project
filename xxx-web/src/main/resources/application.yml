@@ -93,7 +93,7 @@ com:
       description: "测试工程描述"
       title: "测试工程"
     file:
-      active: minio
+      active: local
       tempPath: "/aaaa"
       local:
         localPath: "/bbbb"
@@ -111,6 +111,11 @@ com:
       global: true
     auth:
       max-online: 10
+    data:
+      requestEnable: true
+      requestEnableType: node
+      responseEnable: true
+      responseEnableType: node
 
 minio:
   endpoint: http://192.168.0.76:9000

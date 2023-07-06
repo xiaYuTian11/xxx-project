@@ -1,6 +1,7 @@
 package com.zenith.xxx.controller;
 
 import com.efficient.auth.permission.Permission;
+import com.efficient.common.exception.DataSecurityException;
 import com.efficient.common.result.Result;
 import com.efficient.logs.annotation.Log;
 import com.efficient.logs.constant.LogEnum;
@@ -19,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.xml.bind.DataBindingException;
 
 /**
  * <p>
@@ -32,7 +34,7 @@ import javax.validation.constraints.NotBlank;
 @RequestMapping("/sysLog")
 @Validated
 @Api(tags = "日志记录")
-@Permission
+// @Permission
 public class SysLogController {
 
     @Autowired
