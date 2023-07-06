@@ -112,9 +112,9 @@ com:
     auth:
       max-online: 10
     data:
-      requestEnable: true
+      requestEnable: false
       requestEnableType: node
-      responseEnable: true
+      responseEnable: false
       responseEnableType: node
 
 minio:

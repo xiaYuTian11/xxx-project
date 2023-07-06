@@ -196,7 +196,7 @@
         <dependency>
             <groupId>top.tanmw</groupId>
             <artifactId>efficient-boot-data-security-start</artifactId>
-            <version>0.6.1</version>
+            <version>0.7.0</version>
         </dependency>
     </dependencies>
     <profiles>
