@@ -14,6 +14,6 @@ public class TaskTest extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        log.info("rrrrrrrrrrrrrrrrrr");
+        log.info("测试定时任务");
     }
 }
