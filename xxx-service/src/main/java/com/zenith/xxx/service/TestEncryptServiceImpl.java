@@ -41,12 +41,12 @@ public class TestEncryptServiceImpl extends ServiceImpl<TestEncryptMapper, TestE
 
     @Override
     public TestEncryptVO findById(String id) {
-        LambdaQueryWrapper<TestEncrypt> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(TestEncrypt::getName, "谭明武");
-        queryWrapper.last(" limit 1");
-        TestEncrypt entity = this.getOne(queryWrapper);
+        // LambdaQueryWrapper<TestEncrypt> queryWrapper = new LambdaQueryWrapper<>();
+        // queryWrapper.like(TestEncrypt::getName, "谭明武");
+        // queryWrapper.last(" limit 1");
+        // TestEncrypt entity = this.getOne(queryWrapper);
 
-        // TestEncrypt entity = this.getById(id);
+        TestEncrypt entity = this.getById(id);
         return testEncryptConverter.entity2Vo(entity);
     }
 

@@ -2,6 +2,8 @@ package com.zenith.xxx.controller;
 
 import com.efficient.common.result.Result;
 import com.efficient.auth.permission.Permission;
+import com.efficient.logs.annotation.Log;
+import com.efficient.logs.constant.LogEnum;
 import com.zenith.xxx.api.TestEncryptService;
 import com.zenith.xxx.model.dto.TestEncryptDTO;
 import com.zenith.xxx.model.dto.TestEncryptListDTO;
@@ -38,6 +40,7 @@ public class TestEncryptController {
     /**
     * 新增
     */
+    @Log(logOpt = LogEnum.SAVE)
     @PostMapping("/save")
     @ApiOperation(value = "保存", response = Result.class)
     public Result save(@Validated @RequestBody TestEncryptDTO dto) {
@@ -48,6 +51,7 @@ public class TestEncryptController {
     /**
     * 详情
     */
+    @Log(logOpt = LogEnum.QUERY)
     @GetMapping("/find")
     @ApiOperation(value = "详情", response = Result.class)
     @ApiImplicitParams({
@@ -61,6 +65,7 @@ public class TestEncryptController {
     /**
     * 修改
     */
+    @Log(logOpt = LogEnum.UPDATE)
     @PostMapping("/update")
     @ApiOperation(value = "修改", response = Result.class)
     public Result update(@Validated @RequestBody TestEncryptDTO dto) {
@@ -71,6 +76,7 @@ public class TestEncryptController {
     /**
     * 删除
     */
+    @Log(logOpt = LogEnum.DELETE)
     @GetMapping("/delete")
     @ApiOperation(value = "删除", response = Result.class)
     @ApiImplicitParams({
@@ -84,6 +90,7 @@ public class TestEncryptController {
     /**
     * 列表
     */
+    @Log(logOpt = LogEnum.PAGE)
     @PostMapping("/list")
     @ApiOperation(value = "列表", response = Result.class)
     public Result list(@Validated @RequestBody TestEncryptListDTO dto) {

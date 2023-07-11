@@ -18,18 +18,18 @@ public class TestDemo {
 
     @Test
     public void test01() throws Exception {
-        // String param = "{\n" +
-        //         "    \"module\":\"123\",\n" +
-        //         "    \"userId\":\"1111\",\n" +
-        //         "    \"userName\":\"谭明武\"\n" +
-        //         "}";
+        String param = "{\n" +
+                "    \"name\":\"谭明武\",\n" +
+                "    \"idCard\":123456789,\n" +
+                "    \"address\":\"重庆市\"\n" +
+                "}";
         // String param = "{\n" +
         //         "        \"module\": \"123\",\n" +
         //         "        \"userId\": \"1111\",\n" +
         //         "        \"userName\": \"谭明武\"\n" +
         //         "    }";
         // String param = "1676440625731461121";
-        String param = "id=1676848003836616706";
+        // String param = "id=1676848003836616706";
         String encrypt = TestDemo.encrypt(param.getBytes(StandardCharsets.UTF_8));
         System.out.println(encrypt);
         System.out.println(URLUtil.encode(encrypt));

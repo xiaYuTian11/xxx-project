@@ -106,19 +106,25 @@ com:
       name: xxx-project
       level: info
       path: /home/logs/xxx-project/
-      daoPackage: com.zenith.xxx.dao
+      sql:
+        showSql: true
+        level: debug
+        daoPackage: com.zenith.xxx.dao
+      db: false
     rate:
       expireTime: 3000
       global: true
     auth:
       max-online: 10
-    data:
-      requestEnable: false
-      requestEnableType: node
-      responseEnable: false
-      responseEnableType: node
-      dbEncryptEnable: true
-      dbEncryptModelPath: com.zenith.xxx.model.entity
+    security:
+      api:
+        requestEnable: true
+        requestEnableType: node
+        responseEnable: true
+        responseEnableType: node
+      db:
+        dbEncryptEnable: true
+        dbEncryptModelPath: com.zenith.xxx.model.entity
 
 minio:
   endpoint: http://192.168.0.76:9000
