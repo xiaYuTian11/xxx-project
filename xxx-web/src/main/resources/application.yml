@@ -67,7 +67,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
-  #  type-aliases-package: com.efficient.**.entity
+#  type-aliases-package: com.efficient.**.entity
   global-config:
     db-config:
       id-type: ASSIGN_ID
@@ -106,6 +106,7 @@ com:
       name: xxx-project
       level: info
       path: /home/logs/xxx-project/
+      daoPackage: com.zenith.xxx.dao
     rate:
       expireTime: 3000
       global: true
@@ -116,6 +117,8 @@ com:
       requestEnableType: node
       responseEnable: false
       responseEnableType: node
+      dbEncryptEnable: true
+      dbEncryptModelPath: com.zenith.xxx.model.entity
 
 minio:
   endpoint: http://192.168.0.76:9000

@@ -1,7 +1,7 @@
-url=jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-driver=com.mysql.cj.jdbc.Driver
-user=root
-password=123456
+url=jdbc:postgresql://192.168.119.5:5432/efficient?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+driver=org.postgresql.Driver
+user=postgres
+password=20191809
 
 ## 是否删除以生成文件（用于配置错误生成的错误文件删除操作）,默认false
 isDelete=
@@ -10,13 +10,13 @@ deleteLevel=
 ## 注意文件路径采用反斜杠,默认当前工程路径
 basePath=
 ## 包工程名称，xxx-web,此处写 xxx,默认取当前工程目录名,D:\java\ideaWorkingSpace\my\generator->generator
-moduleName=xxx
+projectName=xxx
 ## 包名称
-packageName=com.efficient.logs
+packageName=com.zenith.xxx
 ## 模式，single工程，multi 多模块，默认多模块
-pattern=single
+pattern=multi
 ## 包含表名，多个 英文逗号分隔
-includeSet=sys_log
+includeSet=test_encrypt
 ## 不包含表名，多个 英文逗号分隔
 excludeSet=
 ## 去掉指定前缀，如sys,sys_等,多个逗号分割
@@ -26,3 +26,5 @@ replace=true
 ## 生成文件,1-model,2-dto,3-listDto,4-VO,5-converter,6-mapper,7-dao,8-service,9-serviceimpl,10-controller
 ## 1-4,生成表示包含中间连续的类型，英文逗号包括分隔
 fileType=
+## 使用外包模版,模版放在resources/templates不用配置，会默认读取外包模版
+templatePath=/templates

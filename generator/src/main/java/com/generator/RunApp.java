@@ -8,6 +8,6 @@ import top.tanmw.generator.Generator;
  */
 public class RunApp {
     public static void main(String[] args) throws Exception {
-        Generator.run(RunApp.class.getResource("/generator.txt").getPath().toString());
+        Generator.generate(Generator.init(RunApp.class.getResource("/generator.txt").getPath().toString()));
     }
 }

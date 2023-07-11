@@ -11,3 +11,4 @@ target
 *.lock
 *.settings
 *.log
+**/*rebel.xml
