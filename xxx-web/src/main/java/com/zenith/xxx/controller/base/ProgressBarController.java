@@ -1,7 +1,7 @@
 package com.zenith.xxx.controller.base;
 
 import com.efficient.cache.api.CacheUtil;
-import com.efficient.common.vo.DataProgressVO;
+import com.efficient.cache.vo.DataProgressVO;
 import com.efficient.common.result.Result;
 import com.zenith.xxx.model.constant.CacheConstant;
 import io.swagger.annotations.Api;
