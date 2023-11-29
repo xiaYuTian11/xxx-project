@@ -113,17 +113,17 @@ com:
       db: false
     rate:
       expireTime: 3000
-      global: true
+      global: false
     auth:
       max-online: 10
     security:
       api:
-        requestEnable: true
+        requestEnable: false
         requestEnableType: node
-        responseEnable: true
+        responseEnable: false
         responseEnableType: node
       db:
-        dbEncryptEnable: true
+        dbEncryptEnable: false
         dbEncryptModelPath: com.zenith.xxx.model.entity
 
 minio:
