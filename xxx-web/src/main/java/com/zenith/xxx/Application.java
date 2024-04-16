@@ -15,7 +15,7 @@ import org.springframework.context.annotation.FilterType;
  * @since 2022/1/26 16:36
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.efficient", "com.zenith"})
+@ComponentScan(basePackages = {"com.efficient.", "com.zenith"})
 @Slf4j
 @MapperScan(basePackages = {"com.zenith.xxx.dao"})
 public class Application {
